@@ -1,4 +1,4 @@
-TOOL:	xrun	19.09-s003: Started on Oct 18, 2020 at 20:29:51 CEST
+TOOL:	xrun	19.09-s003: Started on Oct 20, 2020 at 23:44:03 CEST
 xrun
 	-f dut.f
 		mtm_Alu.vp
@@ -25,14 +25,13 @@ xcelium>
 xcelium> source /cad/XCELIUM1909/tools/xcelium/files/xmsimrc
 xcelium> database -open waves -into waves.shm -default
 Created default SHM database waves
-xcelium> probe -create -shm top_TB.clk top_TB.op_code top_TB.rst_n top_TB.sin top_TB.sout
+xcelium> probe -create -shm top_TB.A_generated top_TB.B_generated top_TB.CRC_input top_TB.clk top_TB.data_to_send top_TB.loop_iterations_data top_TB.op_code top_TB.rst_n top_TB.sin top_TB.sout top_TB.test
 Created probe 1
 xcelium> run
-Simulation interrupted at 51150790 NS + 0
+Simulation complete via $finish(1) at time 22140 NS + 3
+./alu_testbench.sv:121 	$finish;
 xcelium> ^C
 xcelium> exit
-...Regained control from SimVision
--------------------------------------
 See ./cov_work/scope/lab01/icc.com file for message(s) on coverage constant object marking
 
 coverage setup:
@@ -42,6 +41,6 @@ coverage setup:
   testname :  lab01
 
 coverage files:
-  model(design data) :  ./cov_work/scope/icc_3a1ee8c8_00000000.ucm
-  data               :  ./cov_work/scope/lab01/icc_3a1ee8c8_00000000.ucd
-TOOL:	xrun	19.09-s003: Exiting on Oct 18, 2020 at 20:34:32 CEST  (total: 00:04:41)
+  model(design data) :  ./cov_work/scope/icc_52b0cdee_00000000.ucm
+  data               :  ./cov_work/scope/lab01/icc_52b0cdee_00000000.ucd
+TOOL:	xrun	19.09-s003: Exiting on Oct 21, 2020 at 00:01:16 CEST  (total: 00:17:13)
