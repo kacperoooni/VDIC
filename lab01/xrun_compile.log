@@ -1,0 +1,30 @@
+TOOL:	xrun	19.09-s003: Started on Oct 18, 2020 at 20:29:51 CEST
+xrun
+	-compile
+	-l xrun_compile.log
+	-f dut.f
+		mtm_Alu.vp
+	-f tb.f
+		alu_testbench.sv
+	-v93
+	+nowarnDSEM2009
+	+nowarnDSEMEL
+	+nowarnCGDEFN
+	-xmlibdirname INCA_libs_gui
+	+access+r
+	+gui
+	+overwrite
+	-nocopyright
+	-coverage all
+	-covoverwrite
+	-covfile xrun_covfile.txt
+file: mtm_Alu.vp
+	module worklib.mtm_Alu:vp
+		errors: 0, warnings: 0
+		errors: 0, warnings: 0
+		errors: 0, warnings: 0
+		errors: 0, warnings: 0
+file: alu_testbench.sv
+	module worklib.top_TB:sv
+		errors: 0, warnings: 0
+TOOL:	xrun	19.09-s003: Exiting on Oct 18, 2020 at 20:29:51 CEST  (total: 00:00:00)

@@ -1,0 +1,47 @@
+TOOL:	xrun	19.09-s003: Started on Oct 18, 2020 at 20:29:51 CEST
+xrun
+	-f dut.f
+		mtm_Alu.vp
+	-f tb.f
+		alu_testbench.sv
+	-v93
+	+nowarnDSEM2009
+	+nowarnDSEMEL
+	+nowarnCGDEFN
+	-xmlibdirname INCA_libs_gui
+	+access+r
+	+gui
+	+overwrite
+	-nocopyright
+	-coverage all
+	-covoverwrite
+	-covfile xrun_covfile.txt
+	-covtest lab01
+	-l xrun_gui.log
+
+-------------------------------------
+Relinquished control to SimVision...
+xcelium> 
+xcelium> source /cad/XCELIUM1909/tools/xcelium/files/xmsimrc
+xcelium> database -open waves -into waves.shm -default
+Created default SHM database waves
+xcelium> probe -create -shm top_TB.clk top_TB.op_code top_TB.rst_n top_TB.sin top_TB.sout
+Created probe 1
+xcelium> run
+Simulation interrupted at 51150790 NS + 0
+xcelium> ^C
+xcelium> exit
+...Regained control from SimVision
+-------------------------------------
+See ./cov_work/scope/lab01/icc.com file for message(s) on coverage constant object marking
+
+coverage setup:
+  workdir  :  ./cov_work
+  dutinst  :  top_TB(top_TB)
+  scope    :  scope
+  testname :  lab01
+
+coverage files:
+  model(design data) :  ./cov_work/scope/icc_3a1ee8c8_00000000.ucm
+  data               :  ./cov_work/scope/lab01/icc_3a1ee8c8_00000000.ucd
+TOOL:	xrun	19.09-s003: Exiting on Oct 18, 2020 at 20:34:32 CEST  (total: 00:04:41)
