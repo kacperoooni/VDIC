@@ -15,6 +15,7 @@ tb.f
 +nowarnCGDEFN
 -xmlibdirname
 INCA_libs
+-q
 +overwrite
 -nocopyright
 -coverage

@@ -31,7 +31,7 @@ typedef enum bit[2:0] {INIT  = 3'b000,
 	
 	
 
-localparam TRANSMISSION_CYCLES = 10000;
+localparam TRANSMISSION_CYCLES = 50000;
 
 bit clk;
 bit sin;
@@ -83,8 +83,8 @@ function int gen_number();
 	bit [1:0] random_function;
 	random_function = $random;
 	case(random_function)
-		1'b00: random_number = {32{1'b0}};
-		1'b11: random_number = {32{1'b1}};
+		2'b00: random_number = {32{1'b0}};
+		2'b11: random_number = {32{1'b1}};
 		default: random_number = $random;
 	endcase
 	return random_number;
@@ -149,9 +149,9 @@ initial begin : clk_gen
 
 
 ///////////////////////TESTER VARIABLES/////////////////////////////
-int A_generated;
-int B_generated;
-byte loop_iterations_data;
+bit signed[31:0] A_generated;
+bit signed[31:0] B_generated;
+bit[7:0] loop_iterations_data;
 bit[98:0] data_to_send;
 bit[3:0] CRC_input;
 bit[31:0] transmission_counter;
@@ -246,6 +246,7 @@ initial
 							#1200;
 							if(transmission_counter == TRANSMISSION_CYCLES)
 								begin
+									$display("SIMULATION RESULT: PASSED");
 									$display("%0t %0g",$time, $get_coverage());
 									$finish;
 								end	
@@ -258,16 +259,16 @@ initial
 
 
 ///////////////SCOREBOARD DESERIALIZER VARIABLES////////////////////////////////////////
-byte read_iterator_input;
+bit[7:0] read_iterator_input;
 bit[3:0] read_crc_input;
 bit[98:0] data_read_input,data_read_input_nxt;
-int A_read,B_read;
+bit signed[31:0] A_read,B_read;
 operation_t read_op_code;
-byte read_iterator_output;	
+bit[7:0] read_iterator_output;	
 bit[4:0] read_flags;
 bit[2:0] read_err_flags;	
 bit[54:0] read_data_output;	
-int read_number_output;
+bit signed[31:0] read_number_output;
 bit[2:0] read_crc_output;	
 bit dummy,read_parity_bit;
 ///////////////SCOREBOARD  INPUT DESERIALIZER //////////////////////////////////////	
@@ -353,7 +354,7 @@ initial
  initial begin
 	 //INIT VALUES////////////////////////////////////////
 	   bit c;//carry bit
-	   int predicted_result;
+	   bit signed[31:0] predicted_result;
 	   bit[2:0] predicted_CRC_output;
 	   bit[3:0] predicted_flags;
 	   bit[3:0] predicted_CRC_input;
@@ -401,12 +402,11 @@ initial
 		      if((read_op_code == add_op)|(read_op_code == and_op)|(read_op_code == or_op)|(read_op_code == sub_op)) //CHECK IF OPCODE IS CORRECT
 			        if ((predicted_result != read_number_output) | (predicted_flags != read_flags) | (predicted_CRC_output != read_crc_output))
 				        begin
-				          $error ("FAILED: A: %0d  B: %0d  op: %s result: %0d predicted_result: %0d flags: %0b predicted_flags: %0b output crc: %0h predicted output crc: %0h",
-				                  A_read, B_read, read_op_code.name(), read_number_output, predicted_result, read_flags, predicted_flags, read_crc_output, predicted_CRC_output);
-					      $stop; 
+				 //         $error ("FAILED: A: %0d  B: %0d  op: %s result: %0d predicted_result: %0d flags: %0b predicted_flags: %0b output crc: %0h predicted output crc: %0h",
+				 //                 A_read, B_read, read_op_code.name(), read_number_output, predicted_result, read_flags, predicted_flags, read_crc_output, predicted_CRC_output);
+					        $error ("SIMULATION RESULT: FAILED");
+					      	$finish; 
 				        end
-			        else
-				        $display("DATA OK!!");
 			predicted_flags = 0; // RESET FLAGS
 			c = 0;// RESET CARRY
 		   end	
@@ -414,23 +414,23 @@ initial
 	   else if(output_type_rec == 3'b011)
 		   begin
 		  predicted_parity_bit = Check_parity(predicted_err_flags); //CALCULATING PARITY BIT
-			   if ((predicted_err_flags != read_err_flags)|(predicted_parity_bit != read_parity_bit)) begin
-		          $error ("FAILED: predicted_err_flags: %0b read_err_flags: %0b, predicted_parity_bit: %0b read_parity_bit: %0b",
-		                   predicted_err_flags, read_err_flags, predicted_parity_bit, read_parity_bit);
-			   		$stop; end
-			   else $display("CLT_OK: predicted_err_flags: %0b read_err_flags: %0b, predicted_parity_bit: %0b read_parity_bit: %0b",
-		                   predicted_err_flags, read_err_flags, predicted_parity_bit, read_parity_bit);
-			   
+			   if ((predicted_err_flags != read_err_flags)|(predicted_parity_bit != read_parity_bit)) 
+				   begin
+		       //   $error ("FAILED: predicted_err_flags: %0b read_err_flags: %0b, predicted_parity_bit: %0b read_parity_bit: %0b",
+		       //            predicted_err_flags, read_err_flags, predicted_parity_bit, read_parity_bit);
+				   $error ("SIMULATION RESULT: FAILED");
+			   	   $finish; 
+				   end			   
 		   end
 		   @(state_deserializer == WAIT_FOR_OUTPUT);
    		end : scoreboard
 end
 
 ///////////////COVERAGE DESERIALIZER VARIABLES////////////////////////////////////////
-byte read_iterator_input_cg;
+bit[7:0] read_iterator_input_cg;
 bit[3:0] read_crc_input_cg;
 bit[98:0] data_read_input_cg;
-int A_read_cg,B_read_cg;
+bit signed[31:0] A_read_cg,B_read_cg;
 bit dummy_cg;
 operation_t read_op_code_cg,read_op_code_cg_prv;
 bit was_reset;
@@ -504,7 +504,7 @@ endgroup
 initial
 	begin
 		bit c;//carry bit
-		int predicted_result;
+		bit signed[31:0] predicted_result;
 		bit[3:0] predicted_CRC_input;
 		cg_op_all cg_op_all_ob;
 		cg_op_all cg_op_ar_ob;

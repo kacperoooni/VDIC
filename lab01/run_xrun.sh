@@ -52,6 +52,7 @@ XRUN_ARGS="\
   +nowarnDSEMEL \
   +nowarnCGDEFN \
   -xmlibdirname $INCA \
+  -q \
   $GUI \
   +overwrite \
   -nocopyright \
@@ -136,7 +137,7 @@ function run_imc { #<<<
 
     # printing the summary
     imc -nocopyright -batch -initcmd \
-      "load -run merged_results; report -summary; exit" |& tee -a xrun_cov.rpt
+      "load -run merged_results; report -summary -quiet; exit" |& tee -a xrun_cov.rpt
     xrun_check_status $? "IMC REPORT"
 
     xrun_info "\
