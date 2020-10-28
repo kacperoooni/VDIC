@@ -5,10 +5,8 @@
 -elaborate
 -l
 xrun_elaborate.log
--f
-dut.f
--f
-tb.f
+mtm_Alu.vp
+alu_testbench.sv
 -v93
 +nowarnDSEM2009
 +nowarnDSEMEL

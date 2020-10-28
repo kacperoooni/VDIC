@@ -45,8 +45,8 @@ separator=`perl -e "print \"#\" x $cols"`
 #------------------------------------------------------------------------------
 # simulator arguments #<<<
 XRUN_ARGS="\
-  -f dut.f \
-  -f tb.f \
+  mtm_Alu.vp \
+  alu_testbench.sv \
   -v93 \
   +nowarnDSEM2009 \
   +nowarnDSEMEL \
@@ -137,7 +137,7 @@ function run_imc { #<<<
 
     # printing the summary
     imc -nocopyright -batch -initcmd \
-      "load -run merged_results; report -summary -quiet; exit" |& tee -a xrun_cov.rpt
+      "load -run merged_results; report -summary; exit" |& tee -a xrun_cov.rpt
     xrun_check_status $? "IMC REPORT"
 
     xrun_info "\
