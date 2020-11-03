@@ -1,0 +1,7 @@
+xrun: 19.09-s003: (c) Copyright 1995-2019 Cadence Design Systems, Inc.
+TOOL:	xrun	19.09-s003: Started on Oct 28, 2020 at 20:02:04 CET
+xrun
+	-helpsubcject
+	coverage
+xrun: *E,BDOPT: Unknown option -helpsubcject.
+TOOL:	xrun	19.09-s003: Exiting on Oct 28, 2020 at 20:02:04 CET  (total: 00:00:00)

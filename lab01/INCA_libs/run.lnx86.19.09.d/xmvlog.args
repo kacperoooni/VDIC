@@ -8,7 +8,7 @@
 -amsdlibdir
 ./INCA_libs/AMSD
 mtm_Alu.vp
-alu_testbench.sv
+alu_tb.sv
 -NOWARN
 DSEM2009
 -NOWARN

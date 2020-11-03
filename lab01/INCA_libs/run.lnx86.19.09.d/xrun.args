@@ -6,7 +6,7 @@
 -l
 xrun_elaborate.log
 mtm_Alu.vp
-alu_testbench.sv
+alu_tb.sv
 -v93
 +nowarnDSEM2009
 +nowarnDSEMEL

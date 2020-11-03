@@ -3,7 +3,7 @@ xcelium> run
 SIMULATION RESULT: PASSED
 162943610000 100
 Simulation complete via $finish(1) at time 162943610 NS + 0
-./alu_testbench.sv:251 									$finish;
+./alu_tb.sv:251 									$finish;
 xcelium> exit
 See ./cov_work/scope/lab01/icc.com file for message(s) on coverage constant object marking
 

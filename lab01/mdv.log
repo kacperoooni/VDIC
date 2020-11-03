@@ -1,0 +1,181 @@
+[INFO ] 2020-10-21 00:20:42,557 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 38444
+[INFO ] 2020-10-21 00:20:46,965 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 45343
+[INFO ] 2020-10-24 22:33:01,677 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 35236
+[INFO ] 2020-10-24 22:33:05,861 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 41373
+[INFO ] 2020-10-24 22:34:24,619 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 36046
+[INFO ] 2020-10-24 22:36:45,769 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 33213
+[INFO ] 2020-10-24 22:36:50,006 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 34495
+[INFO ] 2020-10-24 22:37:00,883 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 41661
+[INFO ] 2020-10-24 22:40:30,285 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 36981
+[INFO ] 2020-10-24 22:40:34,467 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 34309
+[INFO ] 2020-10-24 22:40:44,008 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 39496
+[INFO ] 2020-10-24 22:43:10,213 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 38496
+[INFO ] 2020-10-24 22:45:34,813 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 37095
+[INFO ] 2020-10-24 22:45:53,936 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 44236
+[INFO ] 2020-10-24 22:45:58,083 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 43232
+[INFO ] 2020-10-24 22:46:11,546 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 41907
+[INFO ] 2020-10-28 16:21:29,747 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 38648
+[INFO ] 2020-10-28 16:21:34,072 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 33286
+[INFO ] 2020-10-28 16:22:10,126 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 41833
+[INFO ] 2020-10-28 16:23:40,074 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 45400
+[INFO ] 2020-10-28 16:23:44,496 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 37925
+[INFO ] 2020-10-28 16:24:13,334 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 37213
+[INFO ] 2020-10-28 16:39:04,151 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 45127
+[INFO ] 2020-10-28 16:39:08,360 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 41859
+[INFO ] 2020-10-28 16:39:17,155 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 42006
+[INFO ] 2020-10-28 16:41:37,958 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 44532
+[INFO ] 2020-10-28 16:41:42,184 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 39102
+[INFO ] 2020-10-28 16:41:49,063 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 42558
+[INFO ] 2020-10-28 16:42:32,678 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 36182
+[INFO ] 2020-10-28 16:42:36,928 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 41805
+[INFO ] 2020-10-28 16:42:44,052 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 40679
+[INFO ] 2020-10-28 16:46:29,118 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 40700
+[INFO ] 2020-10-28 16:46:33,409 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 37995
+[INFO ] 2020-10-28 16:47:15,906 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 40383
+[INFO ] 2020-10-28 16:51:08,581 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 37746
+[INFO ] 2020-10-28 16:51:12,755 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 36439
+[INFO ] 2020-10-28 16:51:58,129 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 35756
+[INFO ] 2020-10-28 16:54:42,346 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 39625
+[INFO ] 2020-10-28 16:54:46,506 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 43273
+[INFO ] 2020-10-28 16:54:58,821 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 32843
+[INFO ] 2020-10-28 16:56:35,102 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 34057
+[INFO ] 2020-10-28 16:56:39,386 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 40963
+[INFO ] 2020-10-28 16:56:46,676 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 40443
+[INFO ] 2020-10-28 16:58:10,151 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 39469
+[INFO ] 2020-10-28 16:58:14,336 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 41803
+[INFO ] 2020-10-28 16:58:22,032 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 44952
+[INFO ] 2020-10-28 17:00:36,446 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 39797
+[INFO ] 2020-10-28 17:00:40,630 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 40249
+[INFO ] 2020-10-28 17:01:13,915 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 44116
+[INFO ] 2020-10-28 17:03:16,220 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 36454
+[INFO ] 2020-10-28 17:03:20,524 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 43786
+[INFO ] 2020-10-28 17:03:27,733 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 41330
+[INFO ] 2020-10-28 17:05:21,529 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 38188
+[INFO ] 2020-10-28 17:05:25,738 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 42030
+[INFO ] 2020-10-28 17:05:49,758 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 43816
+[INFO ] 2020-10-28 18:16:32,918 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 38720
+[INFO ] 2020-10-28 18:16:37,133 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 40196
+[INFO ] 2020-10-28 18:16:55,042 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 43127
+[INFO ] 2020-10-28 18:20:04,882 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 38019
+[INFO ] 2020-10-28 18:20:09,102 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 35694
+[INFO ] 2020-10-28 18:20:45,184 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 46783
+[INFO ] 2020-10-28 18:21:52,047 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 44957
+[INFO ] 2020-10-28 18:21:56,145 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 41348
+[INFO ] 2020-10-28 18:22:07,858 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 45734
+[INFO ] 2020-10-28 18:24:03,237 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 35330
+[INFO ] 2020-10-28 18:24:07,553 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 33477
+[INFO ] 2020-10-28 18:56:12,423 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 34457
+[INFO ] 2020-10-28 18:56:16,714 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 43473
+[INFO ] 2020-10-28 19:00:01,591 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 38514
+[INFO ] 2020-10-28 19:00:05,956 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 45030
+[INFO ] 2020-10-28 19:00:23,339 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 43187
+[INFO ] 2020-10-28 19:01:23,364 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 44701
+[INFO ] 2020-10-28 19:01:27,696 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 40659
+[INFO ] 2020-10-28 19:01:34,400 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 40556
+[INFO ] 2020-10-28 19:02:35,940 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 43799
+[INFO ] 2020-10-28 19:02:40,099 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 39668
+[INFO ] 2020-10-28 19:02:54,403 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 38281
+[INFO ] 2020-10-28 19:05:32,826 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 37741
+[INFO ] 2020-10-28 19:05:36,946 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 46745
+[INFO ] 2020-10-28 19:05:46,630 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 33161
+[INFO ] 2020-10-28 19:22:49,437 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 42589
+[INFO ] 2020-10-28 19:22:53,669 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 45557
+[INFO ] 2020-10-28 19:23:03,521 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 35375
+[INFO ] 2020-10-28 19:31:25,803 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 46492
+[INFO ] 2020-10-28 19:31:29,953 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 37839
+[INFO ] 2020-10-28 19:36:23,014 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 45681
+[INFO ] 2020-10-28 19:36:27,350 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 43359
+[INFO ] 2020-10-28 19:37:15,896 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 43028
+[INFO ] 2020-10-28 19:37:20,120 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 37435
+[INFO ] 2020-10-28 19:38:04,971 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 45765
+[INFO ] 2020-10-28 19:38:09,268 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 33532
+[INFO ] 2020-10-28 19:38:37,774 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 32933
+[INFO ] 2020-10-28 19:39:27,256 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 39553
+[INFO ] 2020-10-28 19:39:31,363 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 36550
+[INFO ] 2020-10-28 19:39:44,820 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 35247
+[INFO ] 2020-10-28 19:47:06,830 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 33031
+[INFO ] 2020-10-28 19:47:11,045 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 34784
+[INFO ] 2020-10-28 19:51:57,095 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 43377
+[INFO ] 2020-10-28 19:52:01,227 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 33288
+[INFO ] 2020-10-28 19:56:06,558 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 39142
+[INFO ] 2020-10-28 19:56:10,683 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 44647
+[INFO ] 2020-10-28 19:57:36,226 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 33994
+[INFO ] 2020-10-28 19:57:40,426 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 40670
+[INFO ] 2020-10-28 19:58:39,976 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 36654
+[INFO ] 2020-10-28 19:58:44,125 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 34751
+[INFO ] 2020-10-28 19:59:48,468 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 36869
+[INFO ] 2020-10-28 19:59:52,712 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 33949
+[INFO ] 2020-10-28 20:04:52,856 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 44477
+[INFO ] 2020-10-28 20:04:57,103 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 43854
+[INFO ] 2020-10-28 20:06:08,224 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 41916
+[INFO ] 2020-10-28 20:06:12,539 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 38319
+[INFO ] 2020-10-28 20:09:14,857 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 46840
+[INFO ] 2020-10-28 20:10:34,977 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 43182
+[INFO ] 2020-10-28 20:10:39,100 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 38631
+[INFO ] 2020-10-28 20:13:53,957 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 42398
+[ERROR] 2020-10-28 20:13:54,079 [com.cadence.mdv.messaging.MDVASynchronicMessaging] [frontend-pool-2] - invalid command name "-quiet".
+[INFO ] 2020-10-28 20:14:55,594 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 34679
+[ERROR] 2020-10-28 20:14:55,668 [com.cadence.mdv.messaging.MDVASynchronicMessaging] [frontend-pool-1] - extra rundir "merged_results".
+[ERROR] 2020-10-28 20:14:56,969 [com.cadence.mdv.messaging.MDVASynchronicMessaging] [frontend-pool-1] - invalid command name "exitexi".
+[INFO ] 2020-10-28 20:15:14,182 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 42515
+[ERROR] 2020-10-28 20:15:14,271 [com.cadence.mdv.messaging.MDVASynchronicMessaging] [frontend-pool-1] - extra rundir "-quiet".
+[INFO ] 2020-10-28 20:15:31,748 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 46339
+[ERROR] 2020-10-28 20:15:31,829 [com.cadence.mdv.messaging.MDVASynchronicMessaging] [frontend-pool-1] - extra rundir "-quiet".
+[INFO ] 2020-10-28 20:15:44,416 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 39681
+[ERROR] 2020-10-28 20:15:44,487 [com.cadence.mdv.messaging.MDVASynchronicMessaging] [frontend-pool-1] - extra rundir "-quiet".
+[INFO ] 2020-10-28 20:15:56,847 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 36464
+[ERROR] 2020-10-28 20:15:56,918 [com.cadence.mdv.messaging.MDVASynchronicMessaging] [frontend-pool-1] - Directory 'cov_work/scope/merged_results' not found. Verify the existence of the specified directory, and rerun the command
+[INFO ] 2020-10-28 20:16:15,199 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 40516
+[ERROR] 2020-10-28 20:16:15,279 [com.cadence.mdv.messaging.MDVASynchronicMessaging] [frontend-pool-1] - extra rundir "-quiet".
+[INFO ] 2020-10-28 20:16:31,076 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 45980
+[ERROR] 2020-10-28 20:16:31,164 [com.cadence.mdv.messaging.MDVASynchronicMessaging] [frontend-pool-1] - Directory 'cov_work/scope/merged_results' not found. Verify the existence of the specified directory, and rerun the command
+[INFO ] 2020-10-28 20:16:44,627 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 46870
+[ERROR] 2020-10-28 20:16:44,699 [com.cadence.mdv.messaging.MDVASynchronicMessaging] [frontend-pool-1] - extra rundir "-quiet".
+[INFO ] 2020-10-28 20:16:50,523 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 37985
+[ERROR] 2020-10-28 20:16:50,591 [com.cadence.mdv.messaging.MDVASynchronicMessaging] [frontend-pool-1] - Directory 'cov_work/scope/merged_results' not found. Verify the existence of the specified directory, and rerun the command
+[ERROR] 2020-10-28 20:16:50,709 [com.cadence.mdv.messaging.MDVASynchronicMessaging] [frontend-pool-2] - invalid command name "exitexi".
+[ERROR] 2020-10-28 20:16:55,841 [com.cadence.mdv.messaging.MDVASynchronicMessaging] [frontend-pool-1] - invalid command name "exitexi".
+[INFO ] 2020-10-28 20:17:09,302 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 35806
+[ERROR] 2020-10-28 20:17:09,379 [com.cadence.mdv.messaging.MDVASynchronicMessaging] [frontend-pool-1] - extra rundir "-quiet".
+[INFO ] 2020-10-28 20:17:28,433 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 45515
+[ERROR] 2020-10-28 20:17:28,507 [com.cadence.mdv.messaging.MDVASynchronicMessaging] [frontend-pool-1] - Directory 'cov_work/scope/merged_results' not found. Verify the existence of the specified directory, and rerun the command
+[INFO ] 2020-10-28 20:17:55,365 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 39833
+[INFO ] 2020-10-28 20:17:59,566 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 40396
+[ERROR] 2020-10-28 20:17:59,678 [com.cadence.mdv.messaging.MDVASynchronicMessaging] [frontend-pool-2] - bad option "-quiet": should be -text|-html, -metrics, -out, -covered|-uncovered|-excludes|-unr|-all|-both, -exclComments, -append, -showempty, -source, -assertionStatus, -allAssertionCounters, -aspect, -cumulative, -local, -grading, -cross, -kind,, -inst|-type,, -cubeExpand, or entitynames.
+[INFO ] 2020-10-28 20:18:50,766 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 34095
+[INFO ] 2020-10-28 20:18:55,017 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 44964
+[ERROR] 2020-10-28 20:18:55,147 [com.cadence.mdv.messaging.MDVASynchronicMessaging] [frontend-pool-2] - bad option "-quiet": should be -text|-html, -metrics, -out, -covered|-uncovered|-excludes|-unr|-all|-both, -exclComments, -append, -showempty, -source, -assertionStatus, -allAssertionCounters, -aspect, -cumulative, -local, -grading, -cross, -kind,, -inst|-type,, -cubeExpand, or entitynames.
+[INFO ] 2020-10-28 20:20:05,503 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 33620
+[INFO ] 2020-10-28 20:20:09,736 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 42456
+[ERROR] 2020-10-28 20:20:09,852 [com.cadence.mdv.messaging.MDVASynchronicMessaging] [frontend-pool-2] - bad option "-quiet": should be -text|-html, -metrics, -out, -covered|-uncovered|-excludes|-unr|-all|-both, -exclComments, -append, -showempty, -source, -assertionStatus, -allAssertionCounters, -aspect, -cumulative, -local, -grading, -cross, -kind,, -inst|-type,, -cubeExpand, or entitynames.
+[INFO ] 2020-10-28 20:30:11,197 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 32925
+[INFO ] 2020-10-28 20:30:15,396 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 34114
+[ERROR] 2020-10-28 20:30:15,533 [com.cadence.mdv.messaging.MDVASynchronicMessaging] [frontend-pool-2] - bad option "-quiet": should be -text|-html, -metrics, -out, -covered|-uncovered|-excludes|-unr|-all|-both, -exclComments, -append, -showempty, -source, -assertionStatus, -allAssertionCounters, -aspect, -cumulative, -local, -grading, -cross, -kind,, -inst|-type,, -cubeExpand, or entitynames.
+[ERROR] 2020-10-28 21:00:37,655 [com.cadence.mdv.cli.app.MDVCLIApp] [CLI Engine Input Reader] - Error during batch mode launch
+java.io.IOException: Input/output error
+	at java.io.FileInputStream.read0(Native Method)
+	at java.io.FileInputStream.read(FileInputStream.java:207)
+	at jline.internal.NonBlockingInputStream.read(NonBlockingInputStream.java:169)
+	at jline.internal.NonBlockingInputStream.read(NonBlockingInputStream.java:137)
+	at jline.internal.NonBlockingInputStream.read(NonBlockingInputStream.java:246)
+	at jline.internal.InputStreamReader.read(InputStreamReader.java:261)
+	at jline.internal.InputStreamReader.read(InputStreamReader.java:198)
+	at jline.console.ConsoleReader.readCharacter(ConsoleReader.java:2145)
+	at jline.console.ConsoleReader.readLine(ConsoleReader.java:2349)
+	at jline.console.ConsoleReader.readLine(ConsoleReader.java:2269)
+	at com.cadence.mdv.cli.app.MDVCLIApp$ConsoleCLIReader.readLine(MDVCLIApp.java:50)
+	at com.cadence.mdv.cli.app.MDVCLIApp$1.run(MDVCLIApp.java:171)
+	at java.lang.Thread.run(Thread.java:748)
+[INFO ] 2020-10-28 21:05:23,789 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 33079
+[INFO ] 2020-10-28 21:05:28,073 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 46359
+[ERROR] 2020-10-28 21:05:28,227 [com.cadence.mdv.messaging.MDVASynchronicMessaging] [frontend-pool-2] - bad option "-quiet": should be -text|-html, -metrics, -out, -covered|-uncovered|-excludes|-unr|-all|-both, -exclComments, -append, -showempty, -source, -assertionStatus, -allAssertionCounters, -aspect, -cumulative, -local, -grading, -cross, -kind,, -inst|-type,, -cubeExpand, or entitynames.
+[INFO ] 2020-10-28 21:06:03,086 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 46246
+[INFO ] 2020-10-28 21:06:07,254 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 41066
+[INFO ] 2020-10-28 21:06:48,348 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 45749
+[INFO ] 2020-10-28 21:08:50,101 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 44461
+[INFO ] 2020-10-28 21:08:54,237 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 37287
+[INFO ] 2020-10-28 21:19:45,068 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 42029
+[INFO ] 2020-10-28 21:19:49,308 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 40538
+[INFO ] 2020-10-28 21:20:12,821 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 45648
+[INFO ] 2020-10-28 21:20:16,996 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 36602
+[INFO ] 2020-10-29 15:55:33,291 [com.cadence.mdv.imc.Main] [main] - Binding debug tools http on port: 43424
