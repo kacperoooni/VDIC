@@ -82,7 +82,7 @@ covergroup cg_flags_cov;
       coverpoint predicted_flags_cg {
          //  test all error flags
          bins all_flags[] = {[0:$]};
-	     ignore_bins all_flags_ignored = {3,7,10,11,14,15};
+	     ignore_bins all_flags_ignored = {3,6,7,10,11,14,15};
       }
 endgroup
 
@@ -90,7 +90,7 @@ covergroup cg_flags_cov_br;
       coverpoint predicted_flags_cg_prv {
          //  test all flags
          bins all_flags[] = {[0:$]};
-	     ignore_bins all_flags_ignored = {3,7,10,11,14,15};
+	     ignore_bins all_flags_ignored = {3,6,7,10,11,14,15};
       }
 endgroup
 
