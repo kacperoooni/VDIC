@@ -24,7 +24,7 @@ class rectangle extends shape;
 	endfunction
 	
 	function void print();
-		$display("w = %d, h = %d, area = %d", width,height,get_area());
+		$display("Rectangle w = %d, h = %d, area = %d", width,height,get_area());
 	endfunction
 endclass	
 
@@ -38,7 +38,7 @@ class triangle extends shape;
 	endfunction
 	
 	function void print();
-		$display("w = %d, h = %d, area = %d", width,height,get_area());
+		$display("Triangle w = %d, h = %d, area = %d", width,height,get_area());
 	endfunction
 endclass	
 		
@@ -52,7 +52,7 @@ class square extends shape;
 	endfunction
 	
 	function void print();
-		$display("w = %d, area = %d", height,get_area());
+		$display("Square w = %d, area = %d", height,get_area());
 	endfunction
 endclass	
 
@@ -82,10 +82,38 @@ class shape_factory;
 		endcase
 	endfunction
 endclass	
+	
+class shape_reporter #(type T=shape);
+
+   protected static T shape_storage[$];
+
+   static function void queue_up_shape(T shape_t);
+      shape_storage.push_back(shape_t);
+   endfunction  
+
+   static function void report_shapes();
+	   real total_area;
+      foreach (shape_storage[i]) begin
+        shape_storage[i].print();
+	      total_area = total_area + shape_storage[i].get_area();
+      end
+      $display("Total Area: %d",total_area);
+   endfunction 
+
+endclass 
+
+	
 module top;
 	initial begin
 		shape shape_h;
+		triangle triangle_h;
+		rectangle rect_h;
+		square squ_h;
+		
 		shape_h = shape_factory::make_shape("triangle",2,3);
-		shape_h.print();
+		$cast(triangle_h,shape_h);
+		
+		shape_reporter#(triangle)::queue_up_shape(triangle_h);
+		shape_reporter#(triangle)::report_shapes();
 	end	
 endmodule	
