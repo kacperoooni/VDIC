@@ -1,7 +1,7 @@
 virtual class shape;
-	protected int width,height;
+	protected real width,height;
 	
-	function new(int w, int h);
+	function new(real w, real h);
 		width = w;
 		height = h;
 	endfunction	
@@ -15,44 +15,44 @@ virtual class shape;
 endclass	
 
 class rectangle extends shape;
-	function new(int width, int height);
+	function new(real width, real height);
 		super.new(width, height);
 	endfunction	
 
-	function int get_area();
+	function real get_area();
 		return width*height;
 	endfunction
 	
 	function void print();
-		$display("Rectangle w = %d, h = %d, area = %d", width,height,get_area());
+		$display("Rectangle w = %f, h = %f, area = %f", width,height,get_area());
 	endfunction
 endclass	
 
 class triangle extends shape;
-	function new(int width, int height);
+	function new(real width, real height);
 		super.new(width, height);
 	endfunction	
 
-	function int get_area();
+	function real get_area();
 		return width*height/2;
 	endfunction
 	
 	function void print();
-		$display("Triangle w = %d, h = %d, area = %d", width,height,get_area());
+		$display("Triangle w = %f, h = %f, area = %f", width,height,get_area());
 	endfunction
 endclass	
 		
 class square extends shape;
-	function new(int height);
+	function new(real height);
 		super.new(height, height);
 	endfunction	
 
-	function int get_area();
+	function real get_area();
 		return height*height;
 	endfunction
 	
 	function void print();
-		$display("Square w = %d, area = %d", height,get_area());
+		$display("Square w = %f, area = %f", height,get_area());
 	endfunction
 endclass	
 
@@ -97,7 +97,7 @@ class shape_reporter #(type T=shape);
         shape_storage[i].print();
 	      total_area = total_area + shape_storage[i].get_area();
       end
-      $display("Total Area: %d",total_area);
+      $display("Total Area: %f",total_area);
    endfunction 
 
 endclass 
@@ -109,11 +109,40 @@ module top;
 		triangle triangle_h;
 		rectangle rect_h;
 		square squ_h;
-		
-		shape_h = shape_factory::make_shape("triangle",2,3);
-		$cast(triangle_h,shape_h);
-		
-		shape_reporter#(triangle)::queue_up_shape(triangle_h);
-		shape_reporter#(triangle)::report_shapes();
+		int fd;
+		string shape_type_file;
+		real w,h;
+		int status;
+		fd = $fopen("./lab02part2A_shapes.txt","r");
+		forever
+			begin			
+			status = $fscanf(fd,"%s %f %f", shape_type_file, w, h);
+				if (status != 3) begin
+					shape_reporter#(triangle)::report_shapes();
+					shape_reporter#(square)::report_shapes();
+					shape_reporter#(rectangle)::report_shapes();
+					$finish;
+					end
+				case(shape_type_file)
+					"rectangle":
+						begin
+							shape_h = shape_factory::make_shape(shape_type_file,w,h);
+							$cast(rect_h,shape_h);		
+							shape_reporter#(rectangle)::queue_up_shape(rect_h);	
+						end
+					"triangle":
+						begin
+							shape_h = shape_factory::make_shape(shape_type_file,w,h);
+							$cast(triangle_h,shape_h);		
+							shape_reporter#(triangle)::queue_up_shape(triangle_h);	
+						end
+					"square":
+						begin
+							shape_h = shape_factory::make_shape(shape_type_file,w,h);
+							$cast(squ_h,shape_h);		
+							shape_reporter#(square)::queue_up_shape(squ_h);	
+						end
+				endcase	
+			end	
 	end	
 endmodule	
