@@ -10,19 +10,15 @@ virtual class shape;
 		$display("Can't get area of generic shape");
 	endfunction
 	
-	function void print();
-		$display("Generic shape");
-	endfunction	
+	pure virtual function void print();
+
 endclass	
 
 class rectangle extends shape;
 	function new(int width, int height);
 		super.new(width, height);
 	endfunction	
-	
-	
-	
-	
+
 	function int get_area();
 		return width*height;
 	endfunction
@@ -31,11 +27,65 @@ class rectangle extends shape;
 		$display("w = %d, h = %d, area = %d", width,height,get_area());
 	endfunction
 endclass	
+
+class triangle extends shape;
+	function new(int width, int height);
+		super.new(width, height);
+	endfunction	
+
+	function int get_area();
+		return width*height/2;
+	endfunction
+	
+	function void print();
+		$display("w = %d, h = %d, area = %d", width,height,get_area());
+	endfunction
+endclass	
 		
+class square extends shape;
+	function new(int height);
+		super.new(height, height);
+	endfunction	
+
+	function int get_area();
+		return height*height;
+	endfunction
+	
+	function void print();
+		$display("w = %d, area = %d", height,get_area());
+	endfunction
+endclass	
+
+class shape_factory;
+	static function shape make_shape (string shape_type, real w, real h);
+		rectangle rect_h;
+		triangle trian_h;
+		square squ_h;
+		case(shape_type)
+			"rectangle":
+				begin
+					rect_h = new(w,h);
+					return rect_h;
+				end	
+			"triangle":
+				begin
+					trian_h = new(w,h);
+					return trian_h;
+				end	
+			"square":
+				begin
+					squ_h = new(w);
+					return squ_h;
+				end	
+			default:
+				$error("No such shape");
+		endcase
+	endfunction
+endclass	
 module top;
 	initial begin
-		rectangle rect_o;
-		rect_o = new(5,6);
-		rect_o.print();
+		shape shape_h;
+		shape_h = shape_factory::make_shape("triangle",2,3);
+		shape_h.print();
 	end	
 endmodule	
