@@ -1,2 +1,0 @@
-# VDIC
-VDIC2020 AGH
