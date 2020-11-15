@@ -1,18 +1,14 @@
-module tester(
-	alu_bfm bfm_tester
-	);
-	
-import alu_pkg::operation_t;
-import alu_pkg::state_tester_t;
-import alu_pkg::function_t;
-import alu_pkg::*;
-	
-localparam TRANSMISSION_CYCLES = 50000;	
-operation_t op_code;
-state_tester_t state_tester;
-function_t gen_function;
 
-function operation_t get_op();
+class tester;
+	virtual alu_bfm bfm_tester;
+	function new (virtual alu_bfm bfm);
+		bfm_tester = bfm;
+	endfunction	
+	
+	
+
+
+protected function operation_t get_op();
       bit [2:0] op_choice;
       op_choice = $random;
       case (op_choice)
@@ -24,7 +20,7 @@ function operation_t get_op();
       endcase // case (op_choice)
    endfunction// : get_op
    
-function function_t get_function();
+protected function function_t get_function();
       bit [3:0] function_choice;
       function_choice = $random;
       case (function_choice)
@@ -40,7 +36,7 @@ function function_t get_function();
    endfunction// : get_op   
    
 
-function int gen_number();
+protected function int gen_number();
 	int random_number;
 	bit [1:0] random_function;
 	random_function = $random;
@@ -53,7 +49,7 @@ function int gen_number();
 endfunction
 
 
-function bit[3:0] calc_CRC_input(int B, int A, bit[2:0] op_code);
+protected function bit[3:0] calc_CRC_input(int B, int A, bit[2:0] op_code);
 	bit[67:0] data_in;
 	static bit[3:0] lfsr_q = 0;
 	bit[3:0] lfsr_c;
@@ -65,13 +61,13 @@ function bit[3:0] calc_CRC_input(int B, int A, bit[2:0] op_code);
 	return lfsr_c; //CRC
 endfunction
 
-function bit [43:0] DATA(int data);
+protected function bit [43:0] DATA(int data);
 	bit [43:0] data_ret;
 	data_ret = {2'b00,data[31:24],1'b1,2'b00,data[23:16],1'b1,2'b00,data[15:8],1'b1,2'b00,data[7:0],1'b1};
 	return data_ret;
 endfunction	
 	
-function bit [10:0] CTL(byte data);
+protected function bit [10:0] CTL(byte data);
 	bit [10:0] ctl_ret;
 	ctl_ret = {2'b01,data,1'b1};
 	return ctl_ret;
@@ -81,17 +77,20 @@ endfunction
 
 
 	
-	
+task execute();	
 ///////////////////////TESTER VARIABLES/////////////////////////////
+operation_t op_code;
+state_tester_t state_tester;
+function_t gen_function;
 bit signed[31:0] A_generated;
 bit signed[31:0] B_generated;
 bit[7:0] loop_iterations_data;
 bit[98:0] data_to_send;
 bit[3:0] CRC_input;
 bit[31:0] transmission_counter;
+localparam TRANSMISSION_CYCLES = 50000;	
+
 ///////////////////////TESTER FSM/////////////////////////////////////
-initial
-	begin
 		state_tester = INIT;
 		forever
 			begin
@@ -187,8 +186,7 @@ initial
 							else
 								state_tester = GENERATE_FUNCTION;
 						end	
-				endcase
-			end		
-	end		
-
-endmodule	
+				endcase		
+		end		
+endtask
+endclass	

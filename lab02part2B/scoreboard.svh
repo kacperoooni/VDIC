@@ -1,9 +1,11 @@
-module scoreboard(
-	alu_bfm sb_bfm);
+class scoreboard;
+	virtual alu_bfm sb_bfm;
 
-import alu_pkg::*;
+function new(virtual alu_bfm bfm);
+	sb_bfm = bfm;
+endfunction	
 
-function bit[3:0] calc_CRC_input(int B, int A, bit[2:0] op_code);
+protected function bit[3:0] calc_CRC_input(int B, int A, bit[2:0] op_code);
 	bit[67:0] data_in;
 	static bit[3:0] lfsr_q = 0;
 	bit[3:0] lfsr_c;
@@ -15,7 +17,7 @@ function bit[3:0] calc_CRC_input(int B, int A, bit[2:0] op_code);
 	return lfsr_c; //CRC
 endfunction
 
-function bit[2:0] calc_CRC_output(int C, bit[3:0] flags);
+protected function bit[2:0] calc_CRC_output(int C, bit[3:0] flags);
 	bit[36:0] data_in;
 	static bit[2:0] lfsr_q = 3'b111;
 	bit[2:0] lfsr_c;
@@ -27,7 +29,7 @@ function bit[2:0] calc_CRC_output(int C, bit[3:0] flags);
 endfunction
 
 
-function bit Check_parity(bit[2:0] err_flags_in);
+protected function bit Check_parity(bit[2:0] err_flags_in);
 	bit[6:0] data;
 	bit parity_bit;
 	byte i;
@@ -38,24 +40,33 @@ function bit Check_parity(bit[2:0] err_flags_in);
 	return parity_bit;
 endfunction	
 
+task execute();
+	fork
+		execute_1();
+		execute_2();
+		execute_3();
+	join_none	
+endtask
 
-state_deserializer_t state_deserializer;		
-operation_t read_op_code;
-///////////////SCOREBOARD DESERIALIZER VARIABLES////////////////////////////////////////
-bit[7:0] read_iterator_input;
-bit[3:0] read_crc_input;
-bit[98:0] data_read_input,data_read_input_nxt;
-bit signed[31:0] A_read,B_read;
-bit[7:0] read_iterator_output;	
-bit[4:0] read_flags;
-bit[2:0] read_err_flags;	
-bit[54:0] read_data_output;	
-bit signed[31:0] read_number_output;
-bit[2:0] read_crc_output;	
-bit dummy,read_parity_bit;
-///////////////SCOREBOARD  INPUT DESERIALIZER //////////////////////////////////////	
-initial
+		state_deserializer_t state_deserializer;		
+		operation_t read_op_code;
+		///////////////SCOREBOARD DESERIALIZER VARIABLES////////////////////////////////////////
+		bit[7:0] read_iterator_input;
+		bit[3:0] read_crc_input;
+		bit[98:0] data_read_input,data_read_input_nxt;
+		bit signed[31:0] A_read,B_read;
+		bit[7:0] read_iterator_output;	
+		bit[4:0] read_flags;
+		bit[2:0] read_err_flags;	
+		bit[54:0] read_data_output;	
+		bit signed[31:0] read_number_output;
+		bit[2:0] read_crc_output;	
+		bit dummy,read_parity_bit;
+
+
+task execute_1();
 	begin
+		///////////////SCOREBOARD  INPUT DESERIALIZER //////////////////////////////////////	
 		forever
 			begin
 				read_iterator_input = 99;
@@ -69,10 +80,10 @@ initial
 				data_read_input = data_read_input_nxt;	
 			end
 	end		
-
-//////////////SCOREBOARD  DESERIALIZER//////////////////////////////////
-initial
+endtask
+task execute_2();
 	begin
+//////////////SCOREBOARD  DESERIALIZER//////////////////////////////////
 		state_deserializer = WAIT_FOR_OUTPUT;
 		forever
 			begin			
@@ -131,11 +142,9 @@ initial
 				endcase
 			end	
  end
+endtask
  
- 
- initial begin
-	 //INIT VALUES////////////////////////////////////////
-	   bit c;//carry bit
+ 	   bit c;//carry bit
 	   bit signed[31:0] predicted_result;
 	   bit[2:0] predicted_CRC_output;
 	   bit[3:0] predicted_flags;
@@ -143,6 +152,12 @@ initial
 	   bit[2:0] predicted_err_flags;
 	   bit predicted_parity_bit;
 	   bit[2:0] output_type_rec;
+ 
+ 
+ 
+task execute_3();
+	begin
+	 //INIT VALUES////////////////////////////////////////
 	 //FOREVER SCOREBOARD LOOP
    forever begin : scoreboard
 	   @(posedge state_deserializer == DONE); 
@@ -206,5 +221,6 @@ initial
 		   end
 		   @(state_deserializer == WAIT_FOR_OUTPUT);
    		end : scoreboard
-end
-endmodule 
+ end
+endtask
+endclass

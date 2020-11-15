@@ -26,4 +26,9 @@ package alu_pkg;
 	                       SEND = 3'b100,
 	                       DONE_SENDING = 3'b010,
 	                       GENERATE_FUNCTION = 3'b011} state_tester_t;
+	`include "coverage.svh"
+	`include "tester.svh"
+	`include "scoreboard.svh"
+	`include "testbench.svh"
+	
 endpackage		

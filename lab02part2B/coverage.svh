@@ -1,12 +1,9 @@
+class coverage;
+	virtual alu_bfm bfm_cov;
 
 
-module coverage(
-	alu_bfm bfm_cov
-	);
 
-import alu_pkg::operation_t;
-import alu_pkg::*;	
-		
+
 
 function bit[3:0] calc_CRC_input(int B, int A, bit[2:0] op_code);
 	bit[67:0] data_in;
@@ -40,7 +37,14 @@ covergroup cg_op_all;
       }
 endgroup
 
-covergroup cg_op_all_br;
+covergroup cg_op_ar;
+      coverpoint read_op_code_cg {
+         // #A1 test all operations
+         bins A1_all_ops[] = {and_op,or_op,add_op,sub_op};
+      }
+endgroup
+
+covergroup cg_op_br;
       coverpoint read_op_code_cg_prv {
          // #A1 test all operations
          bins A1_all_ops[] = {and_op,or_op,add_op,sub_op};
@@ -70,6 +74,12 @@ covergroup cg_err_flags_cov;
       }
 endgroup
 
+covergroup cg_err_flags_cov_ar;
+      coverpoint predicted_err_flags_cg {
+         // #B2 test all error flags
+         bins B2_read_err_flags[] = {3'b100,3'b010,3'b001};
+      }
+endgroup
 
 covergroup cg_err_flags_cov_br;
       coverpoint predicted_err_flags_cg_prv {
@@ -86,6 +96,14 @@ covergroup cg_flags_cov;
       }
 endgroup
 
+covergroup cg_flags_cov_ar;
+      coverpoint predicted_flags_cg {
+         //  test all error flags
+         bins all_flags[] = {[0:$]};
+	     ignore_bins all_flags_ignored = {3,6,7,10,11,14,15};
+      }
+endgroup
+
 covergroup cg_flags_cov_br;
       coverpoint predicted_flags_cg_prv {
          //  test all flags
@@ -94,43 +112,43 @@ covergroup cg_flags_cov_br;
       }
 endgroup
 
+function new (virtual alu_bfm bfm);
+	cg_op_all = new();
+		cg_op_all.option.name = "A1.Test all operations";
+		cg_op_ar = new();
+		cg_op_ar.option.name = "A2.Test all operations after reset";
+		cg_op_br = new();
+		cg_op_br.option.name = "A3.Test reset after all operations";
+		cg_err_flags_cov = new();
+		cg_err_flags_cov.option.name = "B2.Simulate all error flags";
+		cg_err_flags_cov_ar = new();
+		cg_err_flags_cov_ar.option.name = "B3.Test all error flags after reset";
+		cg_err_flags_cov_br = new();
+		cg_err_flags_cov_br.option.name = "B4.Test reset after all error flags";
+		cg_flags_cov = new();
+		cg_flags_cov.option.name = "B5.Simulate all arithmetic flags";
+		cg_flags_cov_ar = new();
+		cg_flags_cov_ar.option.name = "B6.Test all arithmetic flags after reset";
+		cg_flags_cov_br = new();
+		cg_flags_cov_br.option.name = "B7.Test reset after all arithmetic flags ";
+		cg_op_all_HLV = new();
+		cg_op_all_HLV.option.name = "B1.Simulate all operations with the lowest and highest possible input values (A and B)";
+	bfm_cov = bfm;
+endfunction
+		
+task execute();
+	fork
+		execute_1();
+		execute_2();
+	join_none
+endtask	
 
 
-initial
+task execute_1();
 	begin
 		bit c;//carry bit
 		bit signed[31:0] predicted_result;
 		bit[3:0] predicted_CRC_input;
-		cg_op_all cg_op_all_ob;
-		cg_op_all cg_op_ar_ob;
-		cg_op_all_br cg_op_br_ob;
-		cg_err_flags_cov cg_err_flags_cov_ob;
-		cg_err_flags_cov  cg_err_flags_cov_ar_ob;
-		cg_err_flags_cov_br cg_err_flags_cov_br_ob;
-		cg_flags_cov cg_flags_cov_ob;
-		cg_flags_cov cg_flags_cov_ar_ob;
-		cg_flags_cov_br cg_flags_cov_br_ob;
-		cg_op_all_HLV cg_op_all_HLV_ob;	
-		cg_op_all_ob = new();
-		cg_op_all_ob.option.name = "A1.Test all operations";
-		cg_op_ar_ob = new();
-		cg_op_ar_ob.option.name = "A2.Test all operations after reset";
-		cg_op_br_ob = new();
-		cg_op_br_ob.option.name = "A3.Test reset after all operations";
-		cg_err_flags_cov_ob = new();
-		cg_err_flags_cov_ob.option.name = "B2.Simulate all error flags";
-		cg_err_flags_cov_ar_ob = new();
-		cg_err_flags_cov_ar_ob.option.name = "B3.Test all error flags after reset";
-		cg_err_flags_cov_br_ob = new();
-		cg_err_flags_cov_br_ob.option.name = "B4.Test reset after all error flags";
-		cg_flags_cov_ob = new();
-		cg_flags_cov_ob.option.name = "B5.Simulate all arithmetic flags";
-		cg_flags_cov_ar_ob = new();
-		cg_flags_cov_ar_ob.option.name = "B6.Test all arithmetic flags after reset";
-		cg_flags_cov_br_ob = new();
-		cg_flags_cov_br_ob.option.name = "B7.Test reset after all arithmetic flags ";
-		cg_op_all_HLV_ob = new();
-		cg_op_all_HLV_ob.option.name = "B1.Simulate all operations with the lowest and highest possible input values (A and B)";
 		forever
 			begin
 				read_iterator_input_cg = 99;
@@ -176,15 +194,15 @@ initial
 			      if(predicted_result == 0) predicted_flags_cg[1] = 1; //zero flag prediction
 			      if(predicted_result < 0) predicted_flags_cg[0] = 1; //negative flag prediction
 			      
-			      cg_op_all_ob.sample();
-			      cg_flags_cov_ob.sample();
-			      cg_op_all_HLV_ob.sample();
+			      cg_op_all.sample();
+			      cg_flags_cov.sample();
+			      cg_op_all_HLV.sample();
 			      if(was_reset == 1)
 				      begin
-				      	cg_op_ar_ob.sample();
-					    cg_op_br_ob.sample(); 
-					    cg_flags_cov_ar_ob.sample(); 
-					    cg_flags_cov_br_ob.sample(); 
+				      	cg_op_ar.sample();
+					    cg_op_br.sample(); 
+					    cg_flags_cov_ar.sample(); 
+					    cg_flags_cov_br.sample(); 
 				      end   
 				 read_op_code_cg_prv = read_op_code_cg;
 				 predicted_flags_cg_prv = predicted_flags_cg;     
@@ -192,11 +210,11 @@ initial
 			   end
 		   else
 			   begin
-				  cg_err_flags_cov_ob.sample(); 
+				  cg_err_flags_cov.sample(); 
 			      if(was_reset == 1)
 			      	begin
-				      	cg_err_flags_cov_br_ob.sample();
-				      	cg_err_flags_cov_ar_ob.sample();
+				      	cg_err_flags_cov_br.sample();
+				      	cg_err_flags_cov_ar.sample();
 			      	end
 			      predicted_err_flags_cg_prv = predicted_err_flags_cg;	
 			      read_op_code_cg_prv = no_op;
@@ -206,13 +224,14 @@ initial
 				predicted_flags_cg = 0; // RESET FLAGS
 				c = 0;// RESET CARRY
 			end
-end
-		
-
-
-always@(negedge bfm_cov.rst_n)
-	begin
-		was_reset <= 1;
 	end
-endmodule
+endtask		
+
+task execute_2();
+	begin
+		@(negedge bfm_cov.rst_n)
+		was_reset <= 1;
+	end	
+endtask
+endclass
 	
