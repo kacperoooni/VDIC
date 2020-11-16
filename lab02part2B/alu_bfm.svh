@@ -10,5 +10,8 @@ interface alu_bfm;
 	         clk = ~clk;
 	      end
 	   end	
-	
+
+
+
+
 endinterface	
