@@ -52,14 +52,7 @@ task execute_1();
 		///////////////SCOREBOARD  INPUT DESERIALIZER //////////////////////////////////////	
 		forever
 			begin
-				read_iterator_input = 99;
-				@(negedge sb_bfm.sin);
-				repeat(99)
-					begin
-						@(posedge sb_bfm.clk);
-						read_iterator_input--;
-						data_read_input_nxt[read_iterator_input] = sb_bfm.sin;
-					end
+				sb_bfm.input_deserializer(data_read_input_nxt);
 				data_read_input = data_read_input_nxt;	
 			end
 	end		
@@ -73,12 +66,7 @@ task execute_2();
 				case(state_deserializer)	
  					WAIT_FOR_OUTPUT:
 						begin
-							read_number_output = 0;
-							read_crc_output = 0;
-							read_err_flags = 0;
-							read_flags = 0;
 							read_iterator_output = 54;
-							read_data_output = 0;
 							@(negedge sb_bfm.sout);
 							@(posedge sb_bfm.clk);
 							read_data_output[read_iterator_output] = sb_bfm.sout;
@@ -130,7 +118,6 @@ task execute_3();
 	begin
    forever begin : scoreboard
 	   @(posedge state_deserializer == DONE); 
-	   predicted_err_flags = 0;
 	   output_type_rec = read_data_output[54:52];
 	   //CHECK INPUT BYTES NUMBER///////////////////////////
 	   check_err_flags(data_read_input, predicted_err_flags);
@@ -142,20 +129,20 @@ task execute_3();
 		      if((read_op_code == add_op)|(read_op_code == and_op)|(read_op_code == or_op)|(read_op_code == sub_op)) //CHECK IF OPCODE IS CORRECT
 			        if ((predicted_result != read_number_output) | (predicted_flags != read_flags) | (predicted_CRC_output != read_crc_output))
 				        begin
-				          $error ("FAILED: A:   B:   op: %s result: %0d predicted_result: %0d flags: %0b predicted_flags: %0b output crc: %0h predicted output crc: %0h",
-				                   read_op_code.name(), read_number_output, predicted_result, read_flags, predicted_flags, read_crc_output, predicted_CRC_output);
-					    //    $error ("SIMULATION RESULT: FAILED");
+				        //  $error ("FAILED: A:   B:   op: %s result: %0d predicted_result: %0d flags: %0b predicted_flags: %0b output crc: %0h predicted output crc: %0h",
+				        //           read_op_code.name(), read_number_output, predicted_result, read_flags, predicted_flags, read_crc_output, predicted_CRC_output);
+					        $error ("SIMULATION RESULT: FAILED");
 					      	$finish; 
 				        end	        
 		   end	
 		//IF OUTPUT MESSAGE WAS ONLY CTL///////////////////////////////////////
 	   else if(output_type_rec == 3'b011)
 		   begin
-		  predicted_parity_bit = Check_parity(predicted_err_flags); //CALCULATING PARITY BIT
+		  	   predicted_parity_bit = Check_parity(predicted_err_flags); //CALCULATING PARITY BIT
 			   if ((predicted_err_flags != read_err_flags)|(predicted_parity_bit != read_parity_bit)) 
 				   begin
-		          $error ("FAILED: predicted_err_flags: %0b read_err_flags: %0b, predicted_parity_bit: %0b read_parity_bit: %0b",
-		                   predicted_err_flags, read_err_flags, predicted_parity_bit, read_parity_bit);
+		        //  $error ("FAILED: predicted_err_flags: %0b read_err_flags: %0b, predicted_parity_bit: %0b read_parity_bit: %0b",
+		          //         predicted_err_flags, read_err_flags, predicted_parity_bit, read_parity_bit);
 				   $error ("SIMULATION RESULT: FAILED");
 			   	   $finish; 
 				   end			   

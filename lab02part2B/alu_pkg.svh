@@ -28,7 +28,7 @@ package alu_pkg;
 	                       GENERATE_FUNCTION = 3'b011} state_tester_t;
 	
 	
-	task check_err_flags(
+	task automatic check_err_flags(
 		input [98:0] data_read_input,
 		output [2:0] predicted_err_flags
 		);	
@@ -48,7 +48,7 @@ package alu_pkg;
 		   	 predicted_err_flags[2] = 1; //WRONG NUMBER
 	endtask	
 	
-	task check_art_flags(
+	task automatic check_art_flags(
 		input [98:0] data_read_input,
 		output [3:0] predicted_flags,
 		output bit signed [31:0] predicted_result,
