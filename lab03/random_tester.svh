@@ -1,14 +1,15 @@
 
-class tester;
-	virtual alu_bfm bfm_tester;
-	function new (virtual alu_bfm bfm);
-		bfm_tester = bfm;
-	endfunction	
+class random_tester extends base_tester;
+	`uvm_component_utils (random_tester)
+	
+	function new(string name, uvm_component parent);
+		super.new(name,parent);
+	endfunction
 	
 	
 
 
-protected function operation_t get_op();
+function operation_t get_op();
       bit [2:0] op_choice;
       op_choice = $random;
       case (op_choice)
@@ -20,7 +21,7 @@ protected function operation_t get_op();
       endcase // case (op_choice)
    endfunction// : get_op
    
-protected function function_t get_function();
+function function_t get_function();
       bit [3:0] function_choice;
       function_choice = $random;
       case (function_choice)
@@ -36,7 +37,7 @@ protected function function_t get_function();
    endfunction// : get_op   
    
 
-protected function int gen_number();
+function int gen_number();
 	int random_number;
 	bit [1:0] random_function;
 	random_function = $random;
@@ -49,25 +50,13 @@ protected function int gen_number();
 endfunction
 
 
-protected function bit[3:0] calc_CRC_input(int B, int A, bit[2:0] op_code);
-	bit[67:0] data_in;
-	static bit[3:0] lfsr_q = 0;
-	bit[3:0] lfsr_c;
-	data_in = {B,A,1'b1,op_code};
-	lfsr_c[0] = lfsr_q[0] ^ lfsr_q[2] ^ data_in[0] ^ data_in[3] ^ data_in[4] ^ data_in[6] ^ data_in[8] ^ data_in[9] ^ data_in[10] ^ data_in[11] ^ data_in[15] ^ data_in[18] ^ data_in[19] ^ data_in[21] ^ data_in[23] ^ data_in[24] ^ data_in[25] ^ data_in[26] ^ data_in[30] ^ data_in[33] ^ data_in[34] ^ data_in[36] ^ data_in[38] ^ data_in[39] ^ data_in[40] ^ data_in[41] ^ data_in[45] ^ data_in[48] ^ data_in[49] ^ data_in[51] ^ data_in[53] ^ data_in[54] ^ data_in[55] ^ data_in[56] ^ data_in[60] ^ data_in[63] ^ data_in[64] ^ data_in[66];
-    lfsr_c[1] = lfsr_q[1] ^ lfsr_q[2] ^ lfsr_q[3] ^ data_in[0] ^ data_in[1] ^ data_in[3] ^ data_in[5] ^ data_in[6] ^ data_in[7] ^ data_in[8] ^ data_in[12] ^ data_in[15] ^ data_in[16] ^ data_in[18] ^ data_in[20] ^ data_in[21] ^ data_in[22] ^ data_in[23] ^ data_in[27] ^ data_in[30] ^ data_in[31] ^ data_in[33] ^ data_in[35] ^ data_in[36] ^ data_in[37] ^ data_in[38] ^ data_in[42] ^ data_in[45] ^ data_in[46] ^ data_in[48] ^ data_in[50] ^ data_in[51] ^ data_in[52] ^ data_in[53] ^ data_in[57] ^ data_in[60] ^ data_in[61] ^ data_in[63] ^ data_in[65] ^ data_in[66] ^ data_in[67];
-    lfsr_c[2] = lfsr_q[0] ^ lfsr_q[2] ^ lfsr_q[3] ^ data_in[1] ^ data_in[2] ^ data_in[4] ^ data_in[6] ^ data_in[7] ^ data_in[8] ^ data_in[9] ^ data_in[13] ^ data_in[16] ^ data_in[17] ^ data_in[19] ^ data_in[21] ^ data_in[22] ^ data_in[23] ^ data_in[24] ^ data_in[28] ^ data_in[31] ^ data_in[32] ^ data_in[34] ^ data_in[36] ^ data_in[37] ^ data_in[38] ^ data_in[39] ^ data_in[43] ^ data_in[46] ^ data_in[47] ^ data_in[49] ^ data_in[51] ^ data_in[52] ^ data_in[53] ^ data_in[54] ^ data_in[58] ^ data_in[61] ^ data_in[62] ^ data_in[64] ^ data_in[66] ^ data_in[67];
-    lfsr_c[3] = lfsr_q[1] ^ lfsr_q[3] ^ data_in[2] ^ data_in[3] ^ data_in[5] ^ data_in[7] ^ data_in[8] ^ data_in[9] ^ data_in[10] ^ data_in[14] ^ data_in[17] ^ data_in[18] ^ data_in[20] ^ data_in[22] ^ data_in[23] ^ data_in[24] ^ data_in[25] ^ data_in[29] ^ data_in[32] ^ data_in[33] ^ data_in[35] ^ data_in[37] ^ data_in[38] ^ data_in[39] ^ data_in[40] ^ data_in[44] ^ data_in[47] ^ data_in[48] ^ data_in[50] ^ data_in[52] ^ data_in[53] ^ data_in[54] ^ data_in[55] ^ data_in[59] ^ data_in[62] ^ data_in[63] ^ data_in[65] ^ data_in[67];
-	return lfsr_c; //CRC
-endfunction
-
-protected function bit [43:0] DATA(int data);
+function bit [43:0] DATA(int data);
 	bit [43:0] data_ret;
 	data_ret = {2'b00,data[31:24],1'b1,2'b00,data[23:16],1'b1,2'b00,data[15:8],1'b1,2'b00,data[7:0],1'b1};
 	return data_ret;
 endfunction	
 	
-protected function bit [10:0] CTL(byte data);
+function bit [10:0] CTL(byte data);
 	bit [10:0] ctl_ret;
 	ctl_ret = {2'b01,data,1'b1};
 	return ctl_ret;
@@ -77,19 +66,19 @@ endfunction
 
 
 	
-task execute();	
+task run_phase(uvm_phase phase);
 ///////////////////////TESTER VARIABLES/////////////////////////////
-operation_t op_code;
-state_tester_t state_tester;
-function_t gen_function;
-bit signed[31:0] A_generated;
-bit signed[31:0] B_generated;
-bit[7:0] loop_iterations_data;
-bit[98:0] data_to_send;
-bit[3:0] CRC_input;
-bit[31:0] transmission_counter;
-localparam TRANSMISSION_CYCLES = 50000;	
-
+	operation_t op_code;
+	state_tester_t state_tester;
+	function_t gen_function;
+	bit signed[31:0] A_generated;
+	bit signed[31:0] B_generated;
+	bit[7:0] loop_iterations_data;
+	bit[98:0] data_to_send;
+	bit[3:0] CRC_input;
+	bit[31:0] transmission_counter;
+	localparam TRANSMISSION_CYCLES = 50000;	
+	phase.raise_objection(this);
 ///////////////////////TESTER FSM/////////////////////////////////////
 		state_tester = INIT;
 		forever
@@ -179,14 +168,19 @@ localparam TRANSMISSION_CYCLES = 50000;
 							#1200;
 							if(transmission_counter == TRANSMISSION_CYCLES)
 								begin
-									$display("SIMULATION RESULT: PASSED");
-									$display("%0t %0g",$time, $get_coverage());
-									$finish;
+									repeat(3) 
+									$display("//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+									$display("/////////////////////////////////////////////////RANDOM SIMULATION RESULT: PASSED/////////////////////////////////////////////////////");
+									$display("////////////////////////////////////////////////////Functional coverage: %0g%%/////////////////////////////////////////////////////////", $get_coverage());
+									repeat(3) 
+									$display("//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+									$finish;	
 								end	
 							else
 								state_tester = GENERATE_FUNCTION;
 						end	
 				endcase		
-		end		
+			end
+			phase.drop_objection(this);
 endtask
 endclass	

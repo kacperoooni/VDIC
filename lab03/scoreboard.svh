@@ -1,4 +1,4 @@
-class scoreboard;
+class scoreboard extends uvm_component;
 	`uvm_component_utils(scoreboard)
 	virtual alu_bfm sb_bfm;
 
@@ -6,8 +6,9 @@ function new(string name, uvm_component parent);
 	super.new(name,parent);
 endfunction	: new
 
-function build_phase(uvm_phase phase);
+function void build_phase(uvm_phase phase);
 	if(!uvm_config_db #(virtual alu_bfm)::get(null,"*","bfm",sb_bfm))
+		$fatal(1,"Failed to get BFM");
 endfunction		
 
 protected function bit Check_parity(bit[2:0] err_flags_in);
@@ -21,7 +22,7 @@ protected function bit Check_parity(bit[2:0] err_flags_in);
 	return parity_bit;
 endfunction	
 
-task run_phase(uvm_phase phase]);
+task run_phase(uvm_phase phase);
 	fork
 		execute_1();
 		execute_2();

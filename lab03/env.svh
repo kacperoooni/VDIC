@@ -1,5 +1,5 @@
 class env extends uvm_env;
-	`uvm_component_utils(ens)
+	`uvm_component_utils(env)
 	base_tester tester_h;
 	
 	coverage coverage_h;
@@ -11,8 +11,8 @@ class env extends uvm_env;
 	
 	
 	function void build_phase(uvm_phase phase);
-		tester_h = base_tester::type_id::create("tester.h", this);
-		coverage_h = base_tester::type_id::create("coverage.h", this);
-		scoreboard_h = base_tester::type_id::create("scoreboard.h", this);
+		tester_h = base_tester::type_id::create("tester", this);
+		coverage_h = coverage::type_id::create("coverage", this);
+		scoreboard_h = scoreboard::type_id::create("scoreboard", this);
 	endfunction : build_phase
 endclass : env	

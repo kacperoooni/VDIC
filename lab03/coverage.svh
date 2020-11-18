@@ -1,5 +1,7 @@
-class coverage;
+class coverage extends uvm_component;
+	`uvm_component_utils(coverage)
 	virtual alu_bfm bfm_cov;
+	
 
 ///////////////COVERAGE DESERIALIZER VARIABLES////////////////////////////////////////
 bit[7:0] read_iterator_input_cg;
@@ -98,6 +100,7 @@ endgroup
 
 function new (string name, uvm_component parent);
 	begin
+		super.new(name,parent);
 		cg_op_all = new();
 		cg_op_all.option.name = "A1.Test all operations";
 		cg_op_ar = new();
@@ -118,16 +121,16 @@ function new (string name, uvm_component parent);
 		cg_flags_cov_br.option.name = "B7.Test reset after all arithmetic flags ";
 		cg_op_all_HLV = new();
 		cg_op_all_HLV.option.name = "B1.Simulate all operations with the lowest and highest possible input values (A and B)";
-		super.new(name,parent);
 	end	
 endfunction
 
-function build_phase(uvm_phase phase);
+function void build_phase(uvm_phase phase);
 	if(!uvm_config_db #(virtual alu_bfm)::get(null,"*","bfm",bfm_cov))
+		$fatal(1,"Failed to get BFM");
+endfunction
 
 
-
-task run_phase();
+task run_phase(uvm_phase phase);
 	fork
 		execute_1();
 		execute_2();

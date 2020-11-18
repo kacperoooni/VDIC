@@ -1,6 +1,8 @@
 
 
 package alu_pkg;
+	import uvm_pkg::*;
+`include "uvm_macros.svh"
 	typedef enum bit[2:0] {WAIT_FOR_OUTPUT = 3'b101,
 	                       READ_OUTPUT_DATA = 3'b111,
 	                       READ_OUTPUT_CLT = 3'b110,
@@ -108,8 +110,14 @@ package alu_pkg;
 	
 	
 	`include "coverage.svh"
-	`include "tester.svh"
 	`include "scoreboard.svh"
-	`include "testbench.svh"
+	`include "base_tester.svh"
+	`include "env.svh"
+	`include "random_test.svh"
+	`include "random_tester.svh"
+	`include "HLV_tester.svh"
+	`include "HLV_test.svh"
+	
+	
 	
 endpackage		
