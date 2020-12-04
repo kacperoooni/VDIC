@@ -1,6 +1,5 @@
-class coverage extends uvm_component;
+class coverage extends uvm_subscriber #(command_s);
 	`uvm_component_utils(coverage)
-	virtual alu_bfm bfm_cov;
 	
 
 ///////////////COVERAGE DESERIALIZER VARIABLES////////////////////////////////////////
@@ -124,74 +123,58 @@ function new (string name, uvm_component parent);
 	end	
 endfunction
 
-function void build_phase(uvm_phase phase);
-	if(!uvm_config_db #(virtual alu_bfm)::get(null,"*","bfm",bfm_cov))
-		$fatal(1,"Failed to get BFM");
-endfunction
 
 
-task run_phase(uvm_phase phase);
-	fork
-		execute_1();
-		execute_2();
-	join_none
-endtask	
 
 
-task execute_1();
+function void write(command_s t);
 	begin
 		bit c;//carry bit
 		bit signed[31:0] predicted_result;
 		bit[3:0] predicted_CRC_input;
-		forever
-			begin
-				bfm_cov.input_deserializer(data_read_input_cg);
-			   //CHECK INPUT BYTES NUMBER///////////////////////////
-			   check_err_flags(data_read_input_cg, predicted_err_flags_cg);
-			   if((data_read_input_cg[10] == 0 ) & (data_read_input_cg[9] == 1)) // OK NUMBER
-			   	 read_op_code_cg_prv = read_op_code_cg;
-			   //IF OUTPUT MESSAGE WAS DATA////////////////////////
-			   if(predicted_err_flags_cg == 3'b000)
-				   begin
-					  check_art_flags(data_read_input_cg, predicted_flags_cg, predicted_result_cg, read_op_code_cg);
-					  {B_read_cg,A_read_cg} = {data_read_input_cg[96:89],data_read_input_cg[85:78],data_read_input_cg[74:67],data_read_input_cg[63:56],data_read_input_cg[52:45],data_read_input_cg[41:34],data_read_input_cg[30:23],data_read_input_cg[19:12]};
-				      cg_op_all.sample();
-				      cg_flags_cov.sample();
-				      cg_op_all_HLV.sample();
-				      if(was_reset == 1)
-					      begin
-					      	cg_op_ar.sample();
-						    cg_op_br.sample(); 
-						    cg_flags_cov_ar.sample(); 
-						    cg_flags_cov_br.sample(); 
-					      end   
-					 read_op_code_cg_prv = read_op_code_cg;
-					 predicted_flags_cg_prv = predicted_flags_cg;     
-					 predicted_err_flags_cg_prv = 0;
-				   end
-			   else
-				   begin
-					  cg_err_flags_cov.sample(); 
-				      if(was_reset == 1)
-				      	begin
-					      	cg_err_flags_cov_br.sample();
-					      	cg_err_flags_cov_ar.sample();
-				      	end
-				      predicted_err_flags_cg_prv = predicted_err_flags_cg;	
-				      read_op_code_cg_prv = no_op;
-				      predicted_flags_cg_prv = 0;
-				   end   	
-				   	was_reset = 0;
-			end
+		if(t.reset_now == 1)
+			was_reset = 1;
+		
+			data_read_input_cg = t.data_to_send;
+		   //CHECK INPUT BYTES NUMBER///////////////////////////
+		   check_err_flags(data_read_input_cg, predicted_err_flags_cg);
+		   if((data_read_input_cg[10] == 0 ) & (data_read_input_cg[9] == 1)) // OK NUMBER
+		   	 read_op_code_cg_prv = read_op_code_cg;
+		   //IF OUTPUT MESSAGE WAS DATA////////////////////////
+		   if(predicted_err_flags_cg == 3'b000)
+			   begin
+				  check_art_flags(data_read_input_cg, predicted_flags_cg, predicted_result_cg, read_op_code_cg);
+				  {B_read_cg,A_read_cg} = {data_read_input_cg[96:89],data_read_input_cg[85:78],data_read_input_cg[74:67],data_read_input_cg[63:56],data_read_input_cg[52:45],data_read_input_cg[41:34],data_read_input_cg[30:23],data_read_input_cg[19:12]};
+			      cg_op_all.sample();
+			      cg_flags_cov.sample();
+			      cg_op_all_HLV.sample();
+			      if(was_reset == 1)
+				      begin
+				      	cg_op_ar.sample();
+					    cg_op_br.sample(); 
+					    cg_flags_cov_ar.sample(); 
+					    cg_flags_cov_br.sample(); 
+				      end   
+				 read_op_code_cg_prv = read_op_code_cg;
+				 predicted_flags_cg_prv = predicted_flags_cg;     
+				 predicted_err_flags_cg_prv = 0;
+			   end
+		   else
+			   begin
+				  cg_err_flags_cov.sample(); 
+			      if(was_reset == 1)
+			      	begin
+				      	cg_err_flags_cov_br.sample();
+				      	cg_err_flags_cov_ar.sample();
+			      	end
+			      predicted_err_flags_cg_prv = predicted_err_flags_cg;	
+			      read_op_code_cg_prv = no_op;
+			      predicted_flags_cg_prv = 0;
+			   end   	
+			   	was_reset = 0;
 	end
-endtask		
+endfunction		
 
-task execute_2();
-	forever
-		begin
-			@(negedge bfm_cov.rst_n)
-			was_reset <= 1;
-		end	
-endtask
+
 endclass
 	

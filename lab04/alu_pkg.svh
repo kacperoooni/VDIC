@@ -1,16 +1,14 @@
 
-
+`timescale 1ns/1ps
 package alu_pkg;
 	import uvm_pkg::*;
-`include "uvm_macros.svh"
+	`include "uvm_macros.svh"
 	typedef enum bit[2:0] {WAIT_FOR_OUTPUT = 3'b101,
 	                       READ_OUTPUT_DATA = 3'b111,
 	                       READ_OUTPUT_CLT = 3'b110,
 	                       READ_INPUT = 3'b100,
 	                       DONE = 3'b010} state_deserializer_t;	
-		
-		
-		
+
 	typedef enum bit[3:0] {GEN_NORMAL_OPERATION  = 1,
 	                       GEN_CRC_ERROR = 2, 
 	                       GEN_BYTE_ERROR = 3,
@@ -23,14 +21,22 @@ package alu_pkg;
 	                       sub_op = 3'b101,
 	                       no_op = 3'b111} operation_t;
 		
-	typedef enum bit[2:0] {INIT  = 3'b000,
-	                       RESET = 3'b001, 
-	                       SEND = 3'b100,
-	                       DONE_SENDING = 3'b010,
-	                       GENERATE_FUNCTION = 3'b011} state_tester_t;
+	
+	typedef struct packed {
+					       bit [98:0] data_to_send;
+					       bit reset_now;} command_s;
+	
+	typedef struct packed {
+						   bit[54:0] read_data_output; 
+						   bit[4:0] read_flags; 
+						   bit[2:0] read_crc_output; 
+						   bit[2:0] read_err_flags;
+						   bit read_parity_bit;
+						   bit signed[31:0] read_number_output;} result_s;
 	
 	
-	task automatic check_err_flags(
+	
+	function void check_err_flags(
 		input [98:0] data_read_input,
 		output [2:0] predicted_err_flags
 		);	
@@ -48,9 +54,9 @@ package alu_pkg;
 			   end
 		   else
 		   	 predicted_err_flags[2] = 1; //WRONG NUMBER
-	endtask	
+	endfunction	
 	
-	task automatic check_art_flags(
+	function void check_art_flags(
 		input [98:0] data_read_input,
 		output [3:0] predicted_flags,
 		output bit signed [31:0] predicted_result,
@@ -81,7 +87,7 @@ package alu_pkg;
 	      if(c == 1) predicted_flags[3] = 1;
 	      if(predicted_result == 0) predicted_flags[1] = 1; //zero flag prediction
 	      if(predicted_result < 0) predicted_flags[0] = 1; //negative flag prediction
-	endtask
+	endfunction
 	
 	
 	function bit[3:0] calc_CRC_input(int B, int A, bit[2:0] op_code);
@@ -107,17 +113,23 @@ package alu_pkg;
 		return lfsr_c;
 	endfunction	
 	
-	
-	
 	`include "coverage.svh"
-	`include "scoreboard.svh"
 	`include "base_tester.svh"
-	`include "env.svh"
-	`include "random_test.svh"
 	`include "random_tester.svh"
 	`include "HLV_tester.svh"
-	`include "HLV_test.svh"
+	`include "scoreboard.svh"
+	`include "driver.svh"
+	`include "command_monitor.svh"
+	`include "result_monitor.svh"
 	
+	`include "env.svh"
+	
+	
+	
+	`include "random_test.svh"
+	`include "HLV_test.svh"
+
+
 	
 	
 endpackage		
