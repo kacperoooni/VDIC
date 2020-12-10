@@ -21,7 +21,7 @@ package alu_pkg;
 	                       sub_op = 3'b101,
 	                       no_op = 3'b111} operation_t;
 		
-	
+	/*
 	typedef struct packed {
 					       bit [98:0] data_to_send;
 					       bit reset_now;} command_s;
@@ -33,7 +33,7 @@ package alu_pkg;
 						   bit[2:0] read_err_flags;
 						   bit read_parity_bit;
 						   bit signed[31:0] read_number_output;} result_s;
-	
+	*/
 	
 	
 	function void check_err_flags(
@@ -113,10 +113,11 @@ package alu_pkg;
 		return lfsr_c;
 	endfunction	
 	
+	`include "command_transaction.svh"
+	`include "HLV_transaction.svh"
+	`include "result_transaction.svh"
 	`include "coverage.svh"
-	`include "base_tester.svh"
-	`include "random_tester.svh"
-	`include "HLV_tester.svh"
+	`include "tester.svh"
 	`include "scoreboard.svh"
 	`include "driver.svh"
 	`include "command_monitor.svh"

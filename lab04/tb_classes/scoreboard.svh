@@ -1,7 +1,7 @@
-class scoreboard extends uvm_subscriber #(result_s);
+class scoreboard extends uvm_subscriber #(result_transaction);
 	`uvm_component_utils(scoreboard)
 
-	uvm_tlm_analysis_fifo #(command_s) cmd_f;
+	uvm_tlm_analysis_fifo #(command_transaction) cmd_f;
 	
 function new(string name, uvm_component parent);
 	super.new(name,parent);
@@ -22,8 +22,8 @@ protected function bit Check_parity(bit[2:0] err_flags_in);
 	return parity_bit;
 endfunction	
 
-function void write(result_s t);
-	command_s cmd;
+function void write(result_transaction t);
+	command_transaction cmd;
 	if (!cmd_f.try_get(cmd))
                 $fatal(1, "Missing data in input fifo");
 			check_result(cmd.data_to_send,		

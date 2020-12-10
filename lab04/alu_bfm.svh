@@ -1,7 +1,18 @@
 interface alu_bfm;
 	import alu_pkg::*;
 	logic clk,rst_n,sin,sout;
+
+   bit[54:0] read_data_output; 
+   bit signed[31:0] read_number_output;
+   bit[4:0] read_flags; 
+   bit[2:0] read_crc_output; 
+   bit[2:0] read_err_flags;
+   bit read_parity_bit;
+   
 	
+   bit [98:0] data_to_send;
+   bit reset_now;
+
 	
 	initial begin : clk_gen
 		  #10
@@ -59,16 +70,14 @@ task automatic input_deserializer(output bit[98:0] data_read_input);
 endtask
 
 command_monitor command_monitor_h;
-
-
-	command_s command;
+command_transaction command;
 
 initial
 	begin
 	forever
 		begin
 			@(negedge rst_n)
-			command.reset_now = 1;
+			reset_now = 1;
 		end
 end		
 
@@ -76,9 +85,9 @@ initial
 	begin
 	forever
 		begin
-			input_deserializer(command.data_to_send);
-        	command_monitor_h.write_to_monitor(command);
-			command.reset_now = 0;
+			input_deserializer(data_to_send);
+        	command_monitor_h.write_to_monitor(data_to_send, reset_now);
+			reset_now = 0;
 		end
 end
 
@@ -147,12 +156,11 @@ result_monitor result_monitor_h;
 
 initial
 	begin
-	result_s result;
 	forever
 		begin
 			//$display("deserializer starts");
-			output_deserializer(result.read_data_output,result.read_number_output, result.read_flags, result.read_crc_output, result.read_err_flags, result.read_parity_bit);
-			result_monitor_h.write_to_monitor(result);
+			output_deserializer(read_data_output,read_number_output, read_flags, read_crc_output, read_err_flags, read_parity_bit);
+			result_monitor_h.write_to_monitor(read_data_output,read_number_output, read_flags, read_crc_output, read_err_flags, read_parity_bit);
 		end
 	end
 	

@@ -1,13 +1,15 @@
 
-class random_tester extends base_tester;
-	`uvm_component_utils (random_tester)
-	
+class tester extends uvm_component;
+   `uvm_component_utils (tester)
+	uvm_put_port #(command_transaction) command_port;
 	function new(string name, uvm_component parent);
 		super.new(name,parent);
 	endfunction
 	
+	function void build_phase(uvm_phase phase);
+      command_port = new("command_port", this);
+   endfunction : build_phase
 	
-
 
 function operation_t get_op();
       bit [2:0] op_choice;
@@ -67,7 +69,7 @@ endfunction
 
 	
 task run_phase(uvm_phase phase);
-	command_s command;
+	command_transaction  command;
 ///////////////////////TESTER VARIABLES/////////////////////////////
 	operation_t op_code;
 	function_t gen_function;
@@ -79,35 +81,29 @@ task run_phase(uvm_phase phase);
 	localparam TRANSMISSION_CYCLES = 50000;	
 ///////////////////////TESTER CODE/////////////////////////////////////
 	phase.raise_objection(this);
+	command = new("command");
 	transmission_counter = 0;
 		forever
 			begin
-				gen_function=get_function();
-				command.reset_now = 0;
-				case(gen_function)
+				command = command_transaction::type_id::create("command");
+		         if(! command.randomize())
+		             `uvm_fatal("TESTER", "Randomization failed");
+						command.reset_now = 0;
+				case(command.gen_function)
 					GEN_NORMAL_OPERATION:
 						begin
-							A_generated = gen_number();
-							B_generated = gen_number();
-							op_code = get_op();
-							CRC_input = calc_CRC_input(B_generated, A_generated, op_code);
-							command.data_to_send = {DATA(B_generated),DATA(A_generated),CTL({1'b0,op_code,CRC_input})};
+							CRC_input = calc_CRC_input(command.B, command.A, command.op_code);
+							command.data_to_send = {DATA(command.B),DATA(command.A),CTL({1'b0,command.op_code,CRC_input})};
 						end
 					GEN_CRC_ERROR:
 						begin
-							A_generated = gen_number();
-							B_generated = gen_number();
-							op_code = get_op();
-							CRC_input = calc_CRC_input(B_generated, A_generated, op_code)+1;
-							command.data_to_send = {DATA(B_generated),DATA(A_generated),CTL({1'b0,op_code,CRC_input})};
+							CRC_input = calc_CRC_input(command.B, command.A, command.op_code)+1;
+							command.data_to_send = {DATA(command.B),DATA(command.A),CTL({1'b0,command.op_code,CRC_input})};
 						end
 					GEN_BYTE_ERROR:
 						begin
-							A_generated = gen_number();
-							B_generated = gen_number();
-							op_code = get_op();
-							CRC_input = calc_CRC_input(B_generated, A_generated, op_code);
-							command.data_to_send = {DATA(B_generated),DATA(A_generated),CTL({1'b0,op_code,CRC_input})};
+							CRC_input = calc_CRC_input(command.B, command.A, command.op_code);
+							command.data_to_send = {DATA(command.B),DATA(command.A),CTL({1'b0,command.op_code,CRC_input})};
 							command.data_to_send = {{11{1'b1}},command.data_to_send[87:0]};
 						end
 					GEN_RESET:
@@ -116,11 +112,9 @@ task run_phase(uvm_phase phase);
 						end	
 					GEN_UNKNOWN_OP:
 						begin
-							A_generated = gen_number();
-							B_generated = gen_number();
-							op_code = no_op;
-							CRC_input = calc_CRC_input(B_generated, A_generated, op_code);
-							command.data_to_send = {DATA(B_generated),DATA(A_generated),CTL({1'b0,op_code,CRC_input})};
+							command.op_code = no_op;
+							CRC_input = calc_CRC_input(command.B, command.A, command.op_code);
+							command.data_to_send = {DATA(command.B),DATA(command.A),CTL({1'b0,command.op_code,CRC_input})};
 						end
 				endcase
 				//$display ("GENERATED: A: %d  B: %d  op: %s  %s ",A_generated,B_generated, op_code.name(), gen_function.name());
