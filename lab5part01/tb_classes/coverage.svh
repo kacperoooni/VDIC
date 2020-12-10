@@ -1,4 +1,4 @@
-class coverage extends uvm_subscriber #(command_transaction);
+class coverage extends uvm_subscriber #(random_command);
 	`uvm_component_utils(coverage)
 	
 
@@ -127,7 +127,7 @@ endfunction
 
 
 
-function void write(command_transaction t);
+function void write(random_command t);
 	begin
 		bit c;//carry bit
 		bit signed[31:0] predicted_result;

@@ -10,7 +10,6 @@ class result_monitor extends uvm_component;
 								   bit[2:0] read_crc_output,
 								   bit[2:0] read_err_flags,
 								   bit read_parity_bit);
-//        $display ("RESULT MONITOR: resultA: 0x%0h",r);
 	    result_transaction result;
 	    result    = new("result");
 	    result.read_data_output = read_data_output; 
@@ -19,9 +18,6 @@ class result_monitor extends uvm_component;
 	    result.read_crc_output = read_crc_output; 
 	    result.read_err_flags = read_err_flags;
 	    result.read_parity_bit = read_parity_bit;
-	    
-	    
-	    
         ap.write(result);
     endfunction : write_to_monitor
 

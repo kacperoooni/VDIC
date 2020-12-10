@@ -3,7 +3,7 @@ class env extends uvm_env;
 	
 	tester tester_h;
     driver driver_h;
-    uvm_tlm_fifo #(command_transaction) command_f;
+    uvm_tlm_fifo #(random_command) command_f;
 
     coverage coverage_h;
     scoreboard scoreboard_h;

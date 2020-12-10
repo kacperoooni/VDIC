@@ -70,7 +70,7 @@ task automatic input_deserializer(output bit[98:0] data_read_input);
 endtask
 
 command_monitor command_monitor_h;
-command_transaction command;
+random_command command;
 
 initial
 	begin

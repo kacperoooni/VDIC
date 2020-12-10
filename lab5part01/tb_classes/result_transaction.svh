@@ -28,9 +28,9 @@ class result_transaction extends uvm_transaction;
    endfunction : do_copy
 
    virtual function string convert2string();
- //     string s;
- //     s = $sformatf("result: %4h",result);
-  //    return s;
+      string s;
+	  s = $sformatf("result: %d read flags: %b read_err_flags: %b read_parity_bit: %b",read_data_output,read_flags,read_err_flags,read_parity_bit);
+      return s;
    endfunction : convert2string
 
    virtual function bit do_compare(uvm_object rhs, uvm_comparer comparer);

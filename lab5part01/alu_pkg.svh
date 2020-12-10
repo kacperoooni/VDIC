@@ -113,8 +113,8 @@ package alu_pkg;
 		return lfsr_c;
 	endfunction	
 	
-	`include "command_transaction.svh"
-	`include "HLV_transaction.svh"
+	`include "random_command.svh"
+	`include "minmax_command.svh"
 	`include "result_transaction.svh"
 	`include "coverage.svh"
 	`include "tester.svh"

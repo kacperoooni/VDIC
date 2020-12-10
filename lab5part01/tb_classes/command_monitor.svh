@@ -2,7 +2,7 @@ class command_monitor extends uvm_component;
     `uvm_component_utils(command_monitor)
     
 	virtual alu_bfm bfm;
-    uvm_analysis_port #(command_transaction) ap;
+    uvm_analysis_port #(random_command) ap;
 	
 	function new (string name, uvm_component parent);
         super.new(name,parent);
@@ -19,7 +19,7 @@ class command_monitor extends uvm_component;
     endfunction : build_phase
 
     function void write_to_monitor(bit [98:0] data_to_send, bit reset_now);
-	    command_transaction cmd;
+	    random_command cmd;
 	    cmd    = new("cmd");
 	    cmd.data_to_send = data_to_send;
 	    cmd.reset_now = reset_now;

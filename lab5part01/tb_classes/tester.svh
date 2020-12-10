@@ -1,7 +1,7 @@
 
 class tester extends uvm_component;
    `uvm_component_utils (tester)
-	uvm_put_port #(command_transaction) command_port;
+	uvm_put_port #(random_command) command_port;
 	function new(string name, uvm_component parent);
 		super.new(name,parent);
 	endfunction
@@ -69,7 +69,7 @@ endfunction
 
 	
 task run_phase(uvm_phase phase);
-	command_transaction  command;
+	random_command  command;
 ///////////////////////TESTER VARIABLES/////////////////////////////
 	operation_t op_code;
 	function_t gen_function;
@@ -85,7 +85,7 @@ task run_phase(uvm_phase phase);
 	transmission_counter = 0;
 		forever
 			begin
-				command = command_transaction::type_id::create("command");
+				command = random_command::type_id::create("command");
 		         if(! command.randomize())
 		             `uvm_fatal("TESTER", "Randomization failed");
 						command.reset_now = 0;

@@ -1,5 +1,5 @@
-class command_transaction extends uvm_transaction;
-   `uvm_object_utils(command_transaction)
+class random_command extends uvm_transaction;
+   `uvm_object_utils(random_command)
    rand bit signed[31:0]     A;
    rand bit signed[31:0]     B;
    rand operation_t          op_code;
@@ -16,7 +16,7 @@ class command_transaction extends uvm_transaction;
    
 
    virtual function void do_copy(uvm_object rhs);
-      command_transaction copied_transaction_h;
+      random_command copied_transaction_h;
 
       if(rhs == null) 
         `uvm_fatal("COMMAND TRANSACTION", "Tried to copy from a null pointer")
@@ -34,8 +34,8 @@ class command_transaction extends uvm_transaction;
       reset_now = copied_transaction_h.reset_now;
    endfunction : do_copy
 
-   virtual function command_transaction clone_me();
-      command_transaction clone;
+   virtual function random_command clone_me();
+      random_command clone;
       uvm_object tmp;
 
       tmp = this.clone();
@@ -45,7 +45,7 @@ class command_transaction extends uvm_transaction;
    
 
    virtual function bit do_compare(uvm_object rhs, uvm_comparer comparer);
-      command_transaction compared_transaction_h;
+      random_command compared_transaction_h;
       bit   same;
       
       if (rhs==null) `uvm_fatal("RANDOM TRANSACTION", 
@@ -77,4 +77,4 @@ class command_transaction extends uvm_transaction;
       super.new(name);
    endfunction : new
 
-endclass : command_transaction
+endclass

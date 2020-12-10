@@ -1,5 +1,5 @@
-class HLV_transaction extends command_transaction;
-    `uvm_object_utils(HLV_transaction)
+class minmax_command extends random_command;
+    `uvm_object_utils(minmax_command)
 
     constraint data { A dist {32'd0:=1, 32'hFFFF_FFFF:=1};
                       B dist {32'd0:=1, 32'hFFFF_FFFF:=1};

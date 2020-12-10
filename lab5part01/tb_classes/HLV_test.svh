@@ -19,7 +19,7 @@ class HLV_test extends uvm_test;
 	*/
 	function void build_phase(uvm_phase phase);
 		env_h = env::type_id::create("env_h",this);
-		command_transaction::type_id::set_type_override(HLV_transaction::get_type());
+		random_command::type_id::set_type_override(minmax_command::get_type());
 	endfunction : build_phase
 	
 	function new(string name, uvm_component parent);
