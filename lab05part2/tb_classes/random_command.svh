@@ -7,8 +7,8 @@ class random_command extends uvm_transaction;
    bit [98:0]                data_to_send;
    bit                       reset_now;
 
-   constraint data { A dist {32'd0:=100000, 32'hFFFF_FFFF:=100000, [32'h1:32'hFFFF_FFFF]:/100000};
-                     B dist {32'd0:=100000, 32'hFFFF_FFFF:=100000, [32'h1:32'hFFFF_FFFF]:/100000};
+   constraint data { //A dist {32'd0:=100000, 32'hFFFF_FFFF:=100000, [32'h1:32'hFFFF_FFFF]:/100000};
+                     //B dist {32'd0:=100000, 32'hFFFF_FFFF:=100000, [32'h1:32'hFFFF_FFFF]:/100000};
 	   				 op_code dist {sub_op :=1,add_op :=1,or_op :=1,and_op :=1,no_op :=0};
 	   				 gen_function dist {GEN_NORMAL_OPERATION :=8, GEN_CRC_ERROR :=1, GEN_BYTE_ERROR := 1,GEN_RESET :=1,GEN_UNKNOWN_OP :=1};
 	   			   } 
