@@ -12,8 +12,7 @@
 
 #------------------------------------------------------------------------------
 # The list of tests; in GUI mode only the first test is started.
-# TESTS=(random_test);
-TESTS=(dual_test);
+TESTS=(random_test minmax_test);
 #------------------------------------------------------------------------------
 # MAIN
 function main(){
@@ -58,7 +57,6 @@ XRUN_ARGS="\
   +nowarnXCLGNOPTM \
   +nowarnRNDXCELON \
   -xmlibdirname $INCA \
-  -q \
   $GUI \
   +overwrite \
   -nocopyright \
@@ -128,7 +126,7 @@ function xrun_run_all_tests() { #<<<
 
     for TEST in ${TESTS[@]} ; do
       TEST_LIST="$TEST_LIST $TEST"
-      xrun_info "Running test: $TEST. Log saved to xrun_test_$TEST.log"
+      xrun_info "# Running test: $TEST. Log saved to xrun_test_$TEST.log"
       
       # run the simulation
       time_meas_start
@@ -147,7 +145,7 @@ function xrun_run_all_tests() { #<<<
 } #>>>
 #------------------------------------------------------------------------------
 function run_imc { #<<<
-  xrun_info "Running imc."
+  xrun_info "# Running imc."
   time_meas_start
   #------------------------------------------------------------------------------
   # print the coverage results summary (non-GUI mode)

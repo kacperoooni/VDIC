@@ -1,8 +1,12 @@
 class env extends uvm_env;
 	`uvm_component_utils(env)
 	
-	alu_agent class_alu_agent_h;
-    alu_agent module_alu_agent_h;
+	sequencer sequencer_h;
+	driver driver_h;
+    coverage coverage_h;
+    scoreboard scoreboard_h;
+    command_monitor command_monitor_h;
+    result_monitor result_monitor_h;
 	
 	function new (string name, uvm_component parent);
         super.new(name,parent);
@@ -11,29 +15,29 @@ class env extends uvm_env;
 
      function void build_phase(uvm_phase phase);
 
-        env_config env_config_h;
-        alu_agent_config class_config_h;
-        alu_agent_config module_config_h;
-        // get the BFM set form the env_config
-        if(!uvm_config_db #(env_config)::get(this, "","config", env_config_h))
-            `uvm_fatal("ENV", "Failed to get config object");
+        // stimulus
+        sequencer_h       = sequencer::type_id::create("sequencer_h",this);
+        driver_h          = driver::type_id::create("driver_h",this);
+	     
+	     // monitors
+        command_monitor_h = command_monitor::type_id::create("command_monitor_h",this);
+        result_monitor_h  = result_monitor::type_id::create("result_monitor",this);
+	    
+	    // analysis
+        coverage_h        = coverage::type_id::create ("coverage_h",this);
+        scoreboard_h      = scoreboard::type_id::create("scoreboard",this);
 
-        // create configs for the agents
-        class_config_h         = new(.bfm(env_config_h.class_bfm), .is_active(UVM_ACTIVE));
-        module_config_h        = new(.bfm(env_config_h.module_bfm), .is_active(UVM_PASSIVE));
-
-        // store the agent configs in the UMV database
-        // important: restricted access! see second argument
-        uvm_config_db #(alu_agent_config)::set(this, "class_alu_agent_h*",
-            "config", class_config_h);
-        uvm_config_db #(alu_agent_config)::set(this, "module_alu_agent_h*",
-            "config", module_config_h);
-
-        // create the agents
-        class_alu_agent_h  = alu_agent::type_id::create("class_alu_agent_h",this);
-        module_alu_agent_h = alu_agent::type_id::create("module_alu_agent_h",this);
-
+       
+       
+	     
     endfunction : build_phase
+
+    function void connect_phase(uvm_phase phase);
+        driver_h.seq_item_port.connect(sequencer_h.seq_item_export);
+	    command_monitor_h.ap.connect(coverage_h.analysis_export);
+	    result_monitor_h.ap.connect(scoreboard_h.analysis_export);
+        command_monitor_h.ap.connect(scoreboard_h.cmd_f.analysis_export);
+    endfunction : connect_phase
 
 
 endclass : env	

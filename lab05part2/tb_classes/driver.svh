@@ -1,35 +1,20 @@
-class driver extends uvm_component;
+class driver extends uvm_driver #(sequence_item);
     `uvm_component_utils(driver)
 
     virtual alu_bfm bfm;
-    uvm_get_port #(random_command) command_port;
 
 	function void build_phase(uvm_phase phase);
-	   
-	      alu_agent_config alu_agent_config_h;
-		  
-	      if(!uvm_config_db #(alu_agent_config)::get(this, "","config", alu_agent_config_h))
-	        `uvm_fatal("DRIVER", "Failed to get config");
-			
-	      bfm = alu_agent_config_h.bfm;
-		  
-	      command_port = new("command_port",this);
-		  
-	   endfunction : build_phase
+        if(!uvm_config_db #(virtual alu_bfm)::get(null, "*","bfm", bfm))
+            `uvm_fatal("DRIVER", "Failed to get BFM")
+    endfunction : build_phase
 
     task run_phase(uvm_phase phase);
-	    random_command command;
+	    sequence_item seq_it;
         bfm.init_alu();
 	    forever begin
-		    command_port.get(command);
-		    if(command.reset_now == 1)
-			    begin
-			    	bfm.reset_alu();
-				end
-		    else
-			    begin
-			    	bfm.send_data(command.data_to_send);
-				end    
+		    seq_item_port.get_next_item(seq_it);
+            bfm.send_op(seq_it.A, seq_it.B, seq_it.op_code, seq_it.gen_function);
+            seq_item_port.item_done();  
 		    #1000;
 	    end
     endtask : run_phase

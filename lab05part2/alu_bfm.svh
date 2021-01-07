@@ -34,26 +34,6 @@ task init_alu();
 	#200;
 endtask
 
-task reset_alu();
-	rst_n = 1;
-	#320;
-	rst_n = 0;
-	#20;
-	rst_n = 1;
-	#200;
-endtask
-
-task automatic send_data(input bit[98:0] data_to_send);
-	bit[7:0] loop_iterations_data;
-	loop_iterations_data = 99;
-	repeat(99)
-		begin
-			@(negedge clk);
-			loop_iterations_data--;
-			sin = data_to_send[loop_iterations_data];
-		end
-	sin = 1;
-endtask
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -70,7 +50,6 @@ task automatic input_deserializer(output bit[98:0] data_read_input);
 endtask
 
 command_monitor command_monitor_h;
-random_command command;
 
 initial
 	begin
@@ -158,11 +137,84 @@ initial
 	begin
 	forever
 		begin
-			//$display("deserializer starts");
 			output_deserializer(read_data_output,read_number_output, read_flags, read_crc_output, read_err_flags, read_parity_bit);
 			result_monitor_h.write_to_monitor(read_data_output,read_number_output, read_flags, read_crc_output, read_err_flags, read_parity_bit);
 		end
 	end
 	
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function bit [43:0] DATA(int data);
+	bit [43:0] data_ret;
+	data_ret = {2'b00,data[31:24],1'b1,2'b00,data[23:16],1'b1,2'b00,data[15:8],1'b1,2'b00,data[7:0],1'b1};
+	return data_ret;
+endfunction	
+	
+function bit [10:0] CTL(byte data);
+	bit [10:0] ctl_ret;
+	ctl_ret = {2'b01,data,1'b1};
+	return ctl_ret;
+endfunction	
+
+
+
+
+	
+task send_op(input bit signed[31:0] A, input bit signed[31:0] B, input operation_t op_code, input function_t gen_function);
+	begin
+		bit[98:0] data_to_send;
+		bit[3:0] CRC_input;
+		bit[7:0] loop_iterations_data;
+				case(gen_function)
+					GEN_NORMAL_OPERATION:
+						begin
+							CRC_input = calc_CRC_input(B, A, op_code);
+							data_to_send = {DATA(B),DATA(A),CTL({1'b0,op_code,CRC_input})};
+						end
+					GEN_CRC_ERROR:
+						begin
+							CRC_input = calc_CRC_input(B, A, op_code)+1;
+							data_to_send = {DATA(B),DATA(A),CTL({1'b0,op_code,CRC_input})};
+						end
+					GEN_BYTE_ERROR:
+						begin
+							CRC_input = calc_CRC_input(B, A, op_code);
+							data_to_send = {DATA(B),DATA(A),CTL({1'b0,op_code,CRC_input})};
+							data_to_send = {{11{1'b1}},data_to_send[87:0]};
+						end
+					GEN_RESET:
+						begin
+							rst_n = 1;
+							#320;
+							rst_n = 0;
+							#20;
+							rst_n = 1;
+							#200;	
+						end	
+					GEN_UNKNOWN_OP:
+						begin
+							op_code = no_op;
+							CRC_input = calc_CRC_input(B, A, op_code);
+							data_to_send = {DATA(B),DATA(A),CTL({1'b0,op_code,CRC_input})};
+						end
+				endcase
+				if(gen_function != GEN_RESET)
+					begin
+						loop_iterations_data = 99;
+						repeat(99)
+							begin
+								@(negedge clk);
+								loop_iterations_data--;
+								sin = data_to_send[loop_iterations_data];
+							end
+						sin = 1;
+					end
+			end
+endtask
+
+
+
 
 endinterface	

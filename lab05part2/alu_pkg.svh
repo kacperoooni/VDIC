@@ -113,30 +113,27 @@ package alu_pkg;
 		return lfsr_c;
 	endfunction	
 	
-	`include "env_config.svh"
-	`include "alu_agent_config.svh"
+	`include "sequence_item.svh"
+	typedef uvm_sequencer #(sequence_item) sequencer;
+	`include "random_sequence.svh"
+	`include "minmax_sequence.svh"
 	
-	
-	`include "random_command.svh"
-	`include "minmax_command.svh"
 	`include "result_transaction.svh"
 	
+	//`include "sequencer.svh"
+	
 	`include "coverage.svh"
-	`include "tester.svh"
 	`include "scoreboard.svh"
 	`include "driver.svh"
 	`include "command_monitor.svh"
 	`include "result_monitor.svh"
-	`include "alu_agent.svh"
+	
 	
 	`include "env.svh"
 	
-	
-	
-	//`include "random_test.svh"
-	//`include "HLV_test.svh"
-
-	`include "dual_test.svh"
+	`include "alu_base_test.svh"
+	`include "random_test.svh"
+	`include "minmax_test.svh"
 	
 	
 endpackage		
